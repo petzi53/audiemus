@@ -7,7 +7,7 @@ Als Ergänzung zur Masterthese von Claudia Mair "Gestaltung und Implementierung 
 Es wird geprüft inwieweit die Daten für einen Artikel auf der Freiburg-Konferenz eingesetzt werden kann. (Genauer Angaben folgen noch. Dieser Test ist vorerst nur ein Platzhalter.)
 
 ***
-# Nutzung
+# Nutzung des Repos (Abkürzung von Repositoriums)
 
 1. Dateien mit der Endung ".md" können direkt eingesehen werden. Sie zeigen den Fließtext an, nicht jedoch die Ergebnisse aus der R Programmierung.
 
