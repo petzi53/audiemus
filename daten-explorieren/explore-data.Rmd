@@ -1,0 +1,67 @@
+---
+title: "Daten explorieren (1)"
+author: "Peter Baumgartner"
+date: "2017-03-20"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+
+
+```
+
+# Daten explorieren
+
+## Daten einspielen
+
+
+Die Daten sind nun in einem R lesbaren Format bereinigt und als `tidy data` vorhanden. Sie können nun in R geladen werden.
+
+
+```{r lade-daten}
+umfrage <- readRDS("../daten/umfrage.rds")
+
+```
+
+Die Daten können nun entsprechend ihrer Struktur inspiziert werden.
+
+```{r inspiziere-daten}
+str(umfrage)
+```
+
+Die Datei hat ingesamt `r nrow()` (Reihen), das sind "Beobachtungen", d.h. befragte Personen. Es gibt `r ncol()` Spalten das sind Variable.
+
+Der Datensatz gliedert sich in 5 große Bereiche:
+
+1. Allgemeine Fragen: Variable `schultyp` (F1) und Einsatz von Medien im Unterricht (F2). Diese Frage fehlt mir aber !?
+2. Fragen zur Technik-Ausstattung: 8 Variablen die mit "t." beginnen. 
+3. Fragen zu vorhandenen Kompetenzen: 6 Variablen, die mit "k." beginnen.
+4. Fragen zu Wünschen: 15 Variablen, die mit "w." beginnen.
+5. Fragen zu Interessen: 6 Variablen, die mit ".i" beginnen.
+6. Fragen direkt zur Nutzung von Audiemus: 15 Variablen, die mit "a." beginnen.
