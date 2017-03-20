@@ -36,7 +36,7 @@ if (!require("pander"))
 
 ```
 
-# Datenbereinigen
+# Daten bereinigen
 
 ## Daten einspielen
 

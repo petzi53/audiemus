@@ -55,7 +55,7 @@ Die Daten können nun entsprechend ihrer Struktur inspiziert werden.
 str(umfrage)
 ```
 
-Die Datei hat ingesamt `r nrow()` (Reihen), das sind "Beobachtungen", d.h. befragte Personen. Es gibt `r ncol()` Spalten das sind Variable.
+Die Datei hat ingesamt `r nrow(umfrage)` (Reihen), das sind "Beobachtungen", d.h. befragte Personen. Es gibt `r ncol(umfrage)` Spalten das sind Variable.
 
 Der Datensatz gliedert sich in 5 große Bereiche:
 
@@ -65,3 +65,47 @@ Der Datensatz gliedert sich in 5 große Bereiche:
 4. Fragen zu Wünschen: 15 Variablen, die mit "w." beginnen.
 5. Fragen zu Interessen: 6 Variablen, die mit ".i" beginnen.
 6. Fragen direkt zur Nutzung von Audiemus: 15 Variablen, die mit "a." beginnen.
+
+# Explorative Beschreibung durch Visualisierung
+
+## Allgemeine Anmerkung
+Die deskriptive Auswertung der einzelnen Variablen gibt es bereits bei SurveyMonkey. Trotzdem ist es vielleicht sinnvoll, diese Grafiken hier nochmals darzustellen und für einen Bericht schön aufzubereiten. Im Augenblick allerdings dienen die Grafiken nur der visuellen Exploration und dem Generieren von Ideen für Zusammenhänge. Deshalb achte ich zur Zeit auch nicht auf gefälliges Aussehen, verwende weder Farbe noch Legende und z.T. nicht einmal eine Beschriftung.
+
+## Verteilung nach Schultyp
+
+```{r}
+ggplot(umfrage, aes(schultyp)) +
+        geom_bar()
+```
+
+## Technische Ausstattung
+
+Frage: "Wie ist Ihre Schule aus digitaler Sicht technisch ausgerüstet?"
+
+1 = sehr gut
+2 = ausreichend
+3 = ausbaufähig
+4 = schlecht
+5 = nicht vorhanden
+
+```{r}
+ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar()
+ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar() +
+        facet_wrap(~schultyp)
+```
+Die Ausstattung mit PC ist relativ gut. Nur 6 Schulen meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
+
+Schöner als obige Darstellung wäre eine Grafik, wo es für jeden Schultyp nur einen Balken gibt, der sich nach diesen drei Abstufen farblich unterteilt und sich - zum besseren Vergleich - bei allen drei Schultypen zu einer Normgröße (= Gesamtzahl der Antworten dieser Schultype bzw. 100%) aufsummiert. 
+
+**Frage:** Wie lässt sich solch eine Grafik in R erstellen?
+
+```{r}
+ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.pc.ja),
+                position = "fill"
+                )
+```
+Wenn ich obigen Programmcode entsprechend ändere, kann ich alle Variablen nach obigen Muster entsprechend "durch deklinieren". Das muss ich aber auf morgen verschieben.
