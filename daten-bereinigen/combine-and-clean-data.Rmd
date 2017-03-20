@@ -66,10 +66,11 @@ write.xlsx(x = tirol0, file = "../daten/tirol0.xlsx",
        
 ```
 
-# Kommentare beseitigen
+# Kommentare beseitigen und abspeichern
 ```{r kommentare-beseitigen}
 tirol <- select(tirol0, -starts_with("note."))
 write.xlsx(x = tirol, file = "../daten/tirol.xlsx", 
            sheetName = "Umfrage", col.names = TRUE, showNA = TRUE) 
+saveRDS(tirol, file = "../daten/umfrage.rds" )
 ```
 
