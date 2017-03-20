@@ -47,14 +47,14 @@ Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei h
 ```{r load-first-sheet-of-excel-file-into-r-memory}
 
 umfrage.3 <- read_excel(
-        "daten/umfrage-tirol.xlsx",
+        "../daten/umfrage-tirol.xlsx",
         sheet = 3,
         col_names = TRUE,
         col_types = NULL,
         na = "",
         skip = 0
         )
-saveRDS(umfrage.3, file = "daten/umfrage-tirol.3.rds")
+saveRDS(umfrage.3, file = "../daten/umfrage-tirol.3.rds")
 
 ```
 
@@ -283,5 +283,5 @@ tirol.3 <- slice(tirol.3, 3:n())
 
 
 ```{r speichere-bereinigte-datei-unter-neuen-namen}
-saveRDS(tirol.3, file = "daten/tirol.3.rds")
+saveRDS(tirol.3, file = "../daten/tirol.3.rds")
 ```

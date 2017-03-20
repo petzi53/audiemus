@@ -47,14 +47,14 @@ Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei h
 ```{r load-first-sheet-of-excel-file-into-r-memory}
 
 umfrage.5 <- read_excel(
-        "daten/umfrage-tirol.xlsx",
+        "../daten/umfrage-tirol.xlsx",
         sheet = 5,
         col_names = TRUE,
         col_types = NULL,
         na = "",
         skip = 0
         )
-saveRDS(umfrage.5, file = "daten/umfrage-tirol.5.rds")
+saveRDS(umfrage.5, file = "../daten/umfrage-tirol.5.rds")
 
 ```
 
@@ -152,7 +152,7 @@ tirol.5$V43[tirol.5$V45 == "x"] <- "2"
 tirol.5$V43[tirol.5$V46 == "x"] <- "3"
 tirol.5$V43[tirol.5$V47 == "x"] <- "4"
 tirol.5$V43[tirol.5$V48 == "x"] <- "5"
-names(tirol.5)[names(tirol.5) == 'V43'] <- 'note.praktikabel'
+names(tirol.5)[names(tirol.5) == 'V43'] <- 'a.technik.ok'
 
 
 # a.usability
@@ -218,7 +218,7 @@ names(tirol.5)[names(tirol.5) == 'V92'] <- 'a.praktikabel'
 
 # Kommentarspalten umbenennen:
 
-names(tirol.5)[names(tirol.5) == 'V40'] <- 'a.sonstiges'
+names(tirol.5)[names(tirol.5) == 'V40'] <- 'note.audiemus'
 
 names(tirol.5)[names(tirol.5) == 'V49'] <- 'note.technik.ok'
 
@@ -246,5 +246,5 @@ tirol.5 <- slice(tirol.5, 3:n())
 
 
 ```{r speichere-bereinigte-datei-unter-neuen-namen}
-saveRDS(tirol.5, file = "daten/tirol.5.rds")
+saveRDS(tirol.5, file = "../daten/tirol.5.rds")
 ```
