@@ -101,7 +101,7 @@ tirol.1$V7[tirol.1$V11 == "x"] <- "4"
 tirol.1$V7[tirol.1$V12 == "x"] <- "5"
 names(tirol.1)[names(tirol.1) == 'V7'] <- 't.pc.ja'
 
-# pc.nein
+# t.pc.nein
 tirol.1$V13[tirol.1$V14 == "x"] <- "1"
 tirol.1$V13[tirol.1$V15 == "x"] <- "2"
 tirol.1$V13[tirol.1$V16 == "x"] <- "3"
@@ -109,13 +109,13 @@ tirol.1$V13[tirol.1$V17 == "x"] <- "4"
 tirol.1$V13[tirol.1$V18 == "x"] <- "5"
 names(tirol.1)[names(tirol.1) == 'V13'] <- 't.pc.nein'
 
-# tablet
+# t.tablet
 tirol.1$V19[tirol.1$V20 == "x"] <- "1"
 tirol.1$V19[tirol.1$V21 == "x"] <- "2"
 tirol.1$V19[tirol.1$V22 == "x"] <- "3"
 tirol.1$V19[tirol.1$V23 == "x"] <- "4"
 tirol.1$V19[tirol.1$V24 == "x"] <- "5"
-names(tirol.1)[names(tirol.1) == 'V19'] <- 'tablet'
+names(tirol.1)[names(tirol.1) == 'V19'] <- 't.tablet'
 
 # t.lan
 tirol.1$V25[tirol.1$V26 == "x"] <- "1"

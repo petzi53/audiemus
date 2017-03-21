@@ -55,6 +55,17 @@ Die Daten können nun entsprechend ihrer Struktur inspiziert werden.
 str(umfrage)
 ```
 
+```{r}
+umfrage$t.pc.nein <- as.factor(umfrage$t.pc.nein)
+nlevels(umfrage$t.pc.nein)
+levels(umfrage$t.pc.nein)
+class(umfrage$t.pc.nein)
+typeof(umfrage$t.pc.nein)
+attr(umfrage$t.pc.nein, "levels")
+```
+
+
+
 Die Datei hat ingesamt `r nrow(umfrage)` (Reihen), das sind "Beobachtungen", d.h. befragte Personen. Es gibt `r ncol(umfrage)` Spalten das sind Variable.
 
 Der Datensatz gliedert sich in 5 große Bereiche:
@@ -109,3 +120,11 @@ ggplot(data = umfrage) +
                 )
 ```
 Wenn ich obigen Programmcode entsprechend ändere, kann ich alle Variablen nach obigen Muster entsprechend "durch deklinieren". Das muss ich aber auf morgen verschieben.
+
+```{r}
+ggplot(umfrage, aes(t.pc.nein, fill = t.pc.nein)) +
+        geom_bar() +
+        scale_fill_discrete(labels = c("Eins", "Zwei", "Drei", "Vier", "Fünf") ) +
+        scale_x_discrete(labels = c("Eins", "Zwei", "Drei", "Vier", "Fünf") )
+```
+

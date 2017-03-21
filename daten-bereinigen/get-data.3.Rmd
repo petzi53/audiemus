@@ -64,9 +64,9 @@ Leider sind die Daten in einer nicht zu bearbeitenden Form erfasst worden. Richt
 * Es gehört für jede befragte Person (= Beobachtung) eine eine Zeile. 
 * Es gehört für jede Frage (= Variable) eine eigene Spalte, in der dann die entsprechende Ausprägung der Antwort eingetragen wird.
 
-Statt dessen wurden Personen als Spalten geführt und die Fragen als Zeilen. Dazu kommt auch noch, dass die für jede einzelne Ausprägung eine eigene Zeile genommen wurde, was zu einer großen Anzahl leerer Felder führt, die als `NA`s (data "Not Available"") interpretiert werden.
+Statt dessen wurden Personen als Spalten geführt und die Fragen als Zeilen. Dazu kommt auch noch, dass die für jede einzelne Ausprägung eine eigene Zeile genommen wurde, was zu einer großen Anzahl leerer Felder führt, die als `NA`s (data "Not AvailableNA) interpretiert werden.
 
-Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumt"" werden. Dieses Konzept heißt [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
+Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumtNA werden. Dieses Konzept heißt [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
 
 Für die weiteren Transformationen der Datei lege ich ein neues Datenset an, das ich `tirol` nenne.
 Der erste Schritt ist es, dass Zeilen und Spalten verdreht werden. Dies geschieht mit der Funktion `t` (= transpose). `t` erzeugt eine Matrix; ich bevorzuge aber weiterhin im `tibble`-Format zu bleiben. 
@@ -95,7 +95,7 @@ tirol.3$V2[tirol.3$V4 == "x"] <- "2"
 tirol.3$V2[tirol.3$V5 == "x"] <- "3"
 tirol.3$V2[tirol.3$V6 == "x"] <- "4"
 tirol.3$V2[tirol.3$V7 == "x"] <- "5"
-tirol.3$V2[tirol.3$V8 == "x"] <- "k.A."
+tirol.3$V2[tirol.3$V8 == "x"] <- NA
 
 # w.raumwechsel
 tirol.3$V10[tirol.3$V11 == "x"] <- "1"
@@ -103,7 +103,7 @@ tirol.3$V10[tirol.3$V12 == "x"] <- "2"
 tirol.3$V10[tirol.3$V13 == "x"] <- "3"
 tirol.3$V10[tirol.3$V14 == "x"] <- "4"
 tirol.3$V10[tirol.3$V15 == "x"] <- "5"
-tirol.3$V10[tirol.3$V16 == "x"] <- "k.A."
+tirol.3$V10[tirol.3$V16 == "x"] <- NA
 
 
 # w.curricula
@@ -112,7 +112,7 @@ tirol.3$V18[tirol.3$V20 == "x"] <- "2"
 tirol.3$V18[tirol.3$V21 == "x"] <- "3"
 tirol.3$V18[tirol.3$V22 == "x"] <- "4"
 tirol.3$V18[tirol.3$V23 == "x"] <- "5"
-tirol.3$V18[tirol.3$V24 == "x"] <- "k.A."
+tirol.3$V18[tirol.3$V24 == "x"] <- NA
 
 
 # w.kooperation
@@ -121,7 +121,7 @@ tirol.3$V25[tirol.3$V27 == "x"] <- "2"
 tirol.3$V25[tirol.3$V28 == "x"] <- "3"
 tirol.3$V25[tirol.3$V29 == "x"] <- "4"
 tirol.3$V25[tirol.3$V30 == "x"] <- "5"
-tirol.3$V25[tirol.3$V31 == "x"] <- "k.A."
+tirol.3$V25[tirol.3$V31 == "x"] <- NA
 
 
 # w.mehrwert
@@ -130,7 +130,7 @@ tirol.3$V32[tirol.3$V34 == "x"] <- "2"
 tirol.3$V32[tirol.3$V35 == "x"] <- "3"
 tirol.3$V32[tirol.3$V36 == "x"] <- "4"
 tirol.3$V32[tirol.3$V37 == "x"] <- "5"
-tirol.3$V32[tirol.3$V38 == "x"] <- "k.A."
+tirol.3$V32[tirol.3$V38 == "x"] <- NA
 
 
 # w.support
@@ -139,7 +139,7 @@ tirol.3$V39[tirol.3$V41 == "x"] <- "2"
 tirol.3$V39[tirol.3$V42 == "x"] <- "3"
 tirol.3$V39[tirol.3$V43 == "x"] <- "4"
 tirol.3$V39[tirol.3$V44 == "x"] <- "5"
-tirol.3$V39[tirol.3$V45 == "x"] <- "k.A."
+tirol.3$V39[tirol.3$V45 == "x"] <- NA
 
 
 # w.fachbildung
@@ -148,7 +148,7 @@ tirol.3$V46[tirol.3$V48 == "x"] <- "2"
 tirol.3$V46[tirol.3$V49 == "x"] <- "3"
 tirol.3$V46[tirol.3$V50 == "x"] <- "4"
 tirol.3$V46[tirol.3$V51 == "x"] <- "5"
-tirol.3$V46[tirol.3$V52 == "x"] <- "k.A."
+tirol.3$V46[tirol.3$V52 == "x"] <- NA
 
 
 # w.did.bildung
@@ -157,7 +157,7 @@ tirol.3$V54[tirol.3$V56 == "x"] <- "2"
 tirol.3$V54[tirol.3$V57 == "x"] <- "3"
 tirol.3$V54[tirol.3$V58 == "x"] <- "4"
 tirol.3$V54[tirol.3$V59 == "x"] <- "5"
-tirol.3$V54[tirol.3$V60 == "x"] <- "k.A."
+tirol.3$V54[tirol.3$V60 == "x"] <- NA
 
 
 # w.oer
@@ -166,7 +166,7 @@ tirol.3$V62[tirol.3$V64 == "x"] <- "2"
 tirol.3$V62[tirol.3$V65 == "x"] <- "3"
 tirol.3$V62[tirol.3$V66 == "x"] <- "4"
 tirol.3$V62[tirol.3$V67 == "x"] <- "5"
-tirol.3$V62[tirol.3$V68 == "x"] <- "k.A."
+tirol.3$V62[tirol.3$V68 == "x"] <- NA
 
 
 # w.plattform
@@ -175,7 +175,7 @@ tirol.3$V69[tirol.3$V71 == "x"] <- "2"
 tirol.3$V69[tirol.3$V72 == "x"] <- "3"
 tirol.3$V69[tirol.3$V73 == "x"] <- "4"
 tirol.3$V69[tirol.3$V74 == "x"] <- "5"
-tirol.3$V69[tirol.3$V75 == "x"] <- "k.A."
+tirol.3$V69[tirol.3$V75 == "x"] <- NA
 
 
 # w.zeit
@@ -184,7 +184,7 @@ tirol.3$V76[tirol.3$V78 == "x"] <- "2"
 tirol.3$V76[tirol.3$V79 == "x"] <- "3"
 tirol.3$V76[tirol.3$V80 == "x"] <- "4"
 tirol.3$V76[tirol.3$V81 == "x"] <- "5"
-tirol.3$V76[tirol.3$V82 == "x"] <- "k.A."
+tirol.3$V76[tirol.3$V82 == "x"] <- NA
 
 # w.anerkennung
 tirol.3$V84[tirol.3$V85 == "x"] <- "1"
@@ -192,7 +192,7 @@ tirol.3$V84[tirol.3$V86 == "x"] <- "2"
 tirol.3$V84[tirol.3$V87 == "x"] <- "3"
 tirol.3$V84[tirol.3$V88 == "x"] <- "4"
 tirol.3$V84[tirol.3$V89 == "x"] <- "5"
-tirol.3$V84[tirol.3$V90 == "x"] <- "k.A."
+tirol.3$V84[tirol.3$V90 == "x"] <- NA
 
 
 # w.informatik
@@ -201,7 +201,7 @@ tirol.3$V91[tirol.3$V93 == "x"] <- "2"
 tirol.3$V91[tirol.3$V94 == "x"] <- "3"
 tirol.3$V91[tirol.3$V95 == "x"] <- "4"
 tirol.3$V91[tirol.3$V96 == "x"] <- "5"
-tirol.3$V91[tirol.3$V97 == "x"] <- "k.A."
+tirol.3$V91[tirol.3$V97 == "x"] <- NA
 
 
 # w.med.kompetenz
@@ -218,7 +218,7 @@ tirol.3$V105[tirol.3$V107 == "x"] <- "2"
 tirol.3$V105[tirol.3$V108 == "x"] <- "3"
 tirol.3$V105[tirol.3$V108 == "x"] <- "4"
 tirol.3$V105[tirol.3$V110 == "x"] <- "5"
-tirol.3$V105[tirol.3$V111 == "x"] <- "k.A."
+tirol.3$V105[tirol.3$V111 == "x"] <- NA
 
 
 ```
