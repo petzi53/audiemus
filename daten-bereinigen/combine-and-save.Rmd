@@ -72,9 +72,9 @@ write.xlsx(x = tirol0, file = "../daten/tirol0.xlsx",
 ```{r kommentare-beseitigen}
 tirol.notes <- select(tirol0, starts_with("note."))
 tirol <- select(tirol0, -starts_with("note."))
-write.xlsx(x = tirol, file = "../daten/tirol.xlsx", 
-           sheetName = "Umfrage", col.names = TRUE, showNA = TRUE, append = FALSE) 
-write.xlsx(x = tirol.notes, file = "../daten/tirol.xlsx", 
+write.xlsx(x = tirol, file = "../daten/audiemus.xlsx", 
+           sheetName = "Umfrage-Codes", col.names = TRUE, showNA = TRUE, append = FALSE) 
+write.xlsx(x = tirol.notes, file = "../daten/audiemus.xlsx", 
            sheetName = "Kommentare", col.names = TRUE, showNA = TRUE, append = TRUE) 
 saveRDS(tirol, file = "../daten/umfrage.rds" )
 saveRDS(tirol.notes, file = "../daten/kommentare.rds" )
@@ -104,7 +104,7 @@ audiemus <- tirol
 
 audiemus$schultyp <- recode(audiemus$schultyp, "A" = "AHS", "B" = "NMS", "C" = "PTS")
 
-
+audiemus$t.pc.ja <- recode(audiemus$t.pc.ja, "A" = "sehr gut", "B" = "ausreichend", "C" = "ausbaufähig", "D" = "schlecht", "E" = "nicht vorhanden")
 audiemus$t.pc.nein <- recode(audiemus$t.pc.nein, "A" = "sehr gut", "B" = "ausreichend", "C" = "ausbaufähig", "D" = "schlecht", "E" = "nicht vorhanden")
 audiemus$t.tablet <- recode(audiemus$t.tablet, "A" = "sehr gut", "B" = "ausreichend", "C" = "ausbaufähig", "D" = "schlecht", "E" = "nicht vorhanden")
 audiemus$t.lan <- recode(audiemus$t.lan, "A" = "sehr gut", "B" = "ausreichend", "C" = "ausbaufähig", "D" = "schlecht", "E" = "nicht vorhanden")
@@ -183,7 +183,7 @@ audiemus <- audiemus[c(1, 37, 2:15, 38:51, 16:36)]
 saveRDS(audiemus, file = "../daten/audiemus.rds")
 
 write.xlsx(x = audiemus, file = "../daten/audiemus.xlsx",
-           sheetName = "Umfrage", col.names = TRUE, showNA = TRUE)
+           sheetName = "Umfrage-Factors", col.names = TRUE, showNA = TRUE, append = TRUE)
       
 ```
 
