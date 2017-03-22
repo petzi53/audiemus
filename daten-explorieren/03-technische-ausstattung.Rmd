@@ -1,0 +1,222 @@
+---
+title: "03 Technische Ausstattung"
+author: "Peter Baumgartner"
+date: "2017-03-22"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+
+umfrage <- readRDS("../daten/audiemus.rds")
+```
+
+# Allgemeine Anmerkung
+
+Die nachfolgende Fragebatterie zur technischen Ausstattung versucht die folgende Frage zu erfassen:
+Frage: "Wie ist Ihre Schule aus digitaler Sicht technisch ausgerüstet?"
+
+1 = sehr gut
+2 = ausreichend
+3 = ausbaufähig
+4 = schlecht
+5 = nicht vorhanden
+
+Es fehlt aber leider an einer allgemeinen Übersichtsfrage. Es gibt nur Fragen zu einzelnen Aspekten der technischen Ausstattung. Eine Gesamteinschätzung nach dem Motto: "Alles in allem, wie schätzen Sie die technische Ausstattung Ihrer Schule ein" fehlt.
+
+Ich untersuche nachfolgend die technische Ausstattung nach  Schultyp
+
+## PC Arbeitsplätze raumgebunden
+
+```{r}
+# ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+#         geom_bar() 
+bp <- ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar() + 
+        theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
+        facet_wrap(~schultyp)
+bp <- bp + ggtitle("Ausstattung mit PC-Arbeitsplätzen (raumgebunden) nach Schultyp")
+bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
+bp <- bp + ylab("Anzahl")
+bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
+bp
+
+```
+Die Ausstattung mit PC ist relativ gut. Nur 6 Befragate meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
+
+Besser als obige Darstellung ist jedoch eine Grafik, wo es für jeden Schultyp nur einen Balken gibt, der sich nach diesen drei Abstufen farblich unterteilt und sich - zum besseren Vergleich - bei allen drei Schultypen zu einer Normgröße (= Gesamtzahl der Antworten dieser Schultype bzw. 100% in dieser Kategorie) aufsummiert. 
+
+
+```{r pc.ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.pc.ja),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit PC-Arbeitsplätzen (raumgebunden) nach Schultyp")
+bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
+bp
+
+
+```
+Diese Grafk zeigt zweierlei:
+
+1. Die Ausstattung mit PC's wird überwiegend als gut eingeschätzt. In allen Schultypen schätzt mehr als die Hälfte aller Befragten die Situation positiv ein ("sehr gut", "ausreichend") Schlechte Bewertungen ("schlecht", "nicht vorhanden") kommen gar nicht vor.
+2. Im Verhältnis zu den anderen Schultypen hinken die AHS in der Ausstattung etwas nach.
+
+Das wäre jetzt noch mit der aktuellen Infrastrukturerhebung zu validieren. 
+
+
+## PC's vorhanden, aber Räume nicht zugänglich
+
+```{r pc.keine.ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.pc.nein),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit zu wenig verfügbaren PC-Arbeitsplätzen nach Schultyp")
+bp <- bp + xlab("Ausstattung mit zuwenig PC-Arbeitsplätzen weil Räume belegt sind")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "zu wenig PC Arbeitsplätze"))
+bp
+```
+
+
+
+Diese Grafik ist schwierig zu interpretieren, weil die Frage ungeschickt formuliert ist: "Ausstattung mit zu wenig aktuellen PC-Arbeitsplätzen (raumgebunden) - häufig belegt und daher selten nutzbar". Besser wäre z.B. die einfache Frage gewesen: "PC-Räume sind häufig belegt".
+
+## PCs mobil (Laptop, Tablet)
+
+```{r tablet-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.tablet),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit Laptops und Tablets nach Schultyp")
+bp <- bp + xlab("Ausstattung mit Laptops und Tablets nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "mobile Geräte"))
+bp
+```
+
+
+
+Diese Abbildung bestätigt die Ansicht, dass die Ausstattung als recht positiv eingeschätzt wird. Während AHS bei raumgebundenen PC etwas hinter her hinken, sind sie bei Laptops in Relation etwas besser ausgestattet. Diese Aussage ist jedoch wegen der gerinen Fallzahlen mit Vorsicht zu treffen.
+
+## LAN Qualität
+
+```{r lan-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.lan),
+                position = "fill"
+                )
+bp <- bp + ggtitle("LAN-Qualität nach Schultyp")
+bp <- bp + xlab("LAN-Qualität nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "LAN"))
+bp
+```
+
+
+
+## WLAN
+
+```{r wlan-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.wlan),
+                position = "fill"
+                )
+bp <- bp + ggtitle("WLAN-Qualität nach Schultyp")
+bp <- bp + xlab("WLAN-Qualität nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "WLAN"))
+bp
+```
+
+
+
+## Beamer und Lautsprecher
+
+```{r beamer-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.beamer),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit Beamer & Lautsprecher nach Schultyp")
+bp <- bp + xlab("Ausstattung mit Beamer & Lautsprecher nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Beamer & Lautsprecher"))
+bp
+```
+
+Wie wichtig sind Lautsprecher für die Nutzung von _audiemus_? Mir scheint, dass für individuelle Übungen die wichtiger Komponente eher der Kopfhörer darstellt.
+
+## Whiteboard
+
+
+```{r whiteboard-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.whiteboard),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit Whiteboards nach Schultyp")
+bp <- bp + xlab("Ausstattung mit Whiteboards nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Whiteboards"))
+bp
+```
+
+
+Whiteboards sind meiner Ansicht für die Nutzung von _audiemus_ nicht von großer Bedeutung. Ich gehe daher darauf nicht weiter ein.
+
+
+## Kopfhörer
+
+
+```{r kopfhoerer-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.kopfhoerer),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit Kopfhörer nach Schultyp")
+bp <- bp + xlab("Ausstattung mit Kopfhörer nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Kopfhörer"))
+bp
+```
+
+Kopfhörer sind für die individuelle Nutzung von _audiemus_ in der Klasse essentiell. Hier sieht die Situation - zum Unterschied von der PC Ausstattung nicht so gut aus. Ich habe überhaupt den Eindruck, dass es beim  Zubehör schlechter steht, als mit der PC Ausstattung.

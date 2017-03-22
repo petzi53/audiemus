@@ -1,0 +1,111 @@
+---
+title: "02 Grafik-Experimente"
+author: "Peter Baumgartner"
+date: "2017-03-22"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+
+umfrage <- readRDS("../daten/audiemus.rds")
+```
+
+# Explorative Beschreibung durch Visualisierung
+
+## Allgemeine Anmerkung
+Die deskriptive Auswertung der einzelnen Variablen gibt es bereits bei SurveyMonkey. Trotzdem ist es vielleicht sinnvoll, diese Grafiken hier nochmals darzustellen und für einen Bericht schön aufzubereiten. Im Augenblick allerdings dienen die Grafiken nur der visuellen Exploration und dem Generieren von Ideen für Zusammenhänge. Deshalb achte ich zur Zeit auch nicht auf optimales Aussehen.
+
+Die nachfolgenden Grafiken sind erst rudimentär ausgearbeitet. Das betrifft insbesondere 
+
+* Titel und Untertitel und eventuelle Referenz der Grafik
+* Größen (Länge/Breite)
+* Beschriftung der Axen
+* Text und Darstellung der Legende
+* Graustufen (Druck) bzw. Farbskala (auch für Farbbline!)
+* etc.
+
+Allerdings versuche ich eine prototypischen Grafik zu entwickeln, die alle Elemente, die für die spätere Darstellung wichtig sind, bereits enthält. Die entsprechenden Elemente haben noch keine inhalltiche Genauigkeit, sondern sind nur als Platzhalter gedacht. 
+
+## Entwicklung eines Prototyps für die grafische Darstellung
+
+### Balkendiagramm einfach
+
+Für die Darstellung von qualitativen Variablen eigenen sich am Besten Balkendiagramme. 
+
+
+```{r}
+bp <- ggplot(umfrage, aes(schultyp, fill = schultyp)) +
+        geom_bar()
+bp <- bp + ggtitle("Befragte nach Schultypen")
+bp <- bp + xlab("Befragte nach Schultypen")
+bp <- bp + ylab("Anzahl")
+bp <- bp + guides(fill = guide_legend(title = "Schultyp"))
+bp
+```
+
+## Balkendiagramm (Facetten-Darstelluung)
+
+Eine Variable (wie z.B. `schultyp` kann auch mit einer weiteren Variablen (z.B. Ausstattung mit PCs) zusammen dargestellt werden.
+
+
+```{r}
+# ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+#         geom_bar() 
+bp <- ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar() + 
+        theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
+        facet_wrap(~schultyp)
+bp <- bp + ggtitle("Ausstattung mit PC-Arbeitsplätzen (raumgebunden) nach Schultyp")
+bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
+bp <- bp + ylab("Anzahl")
+bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
+bp
+
+```
+Die Ausstattung mit PC ist relativ gut. Nur 6 Befragate meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
+
+## Balkendiagramm standardisiert
+Besser als obige Darstellung ist jedoch eine Grafik, wo es für jeden Schultyp nur einen Balken gibt, der sich nach diesen drei Abstufen farblich unterteilt und sich - zum besseren Vergleich - bei allen drei Schultypen zu einer Normgröße (= Gesamtzahl der Antworten dieser Schultype bzw. 100% in dieser Kategorie) aufsummiert. 
+
+
+```{r pc.ausstattung-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = t.pc.ja),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Ausstattung mit PC-Arbeitsplätzen (raumgebunden) nach Schultyp")
+bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
+bp
+```
+
+Diese Grafik ist schon recht gelungen. Ich habe auch bereits Titel, Achsen und Legende beschrieben und fabrlich codiert. Das kann als erster Protyp für die weitere Exploration dienen. 
+
