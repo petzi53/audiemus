@@ -37,9 +37,9 @@ Das Bookmarklet findet sich auf: http://htmlpreview.github.io/ (Den Link "HTMLPr
 
 ## Wo zuerst hinschauen?
 
-Die "offizielle" Fassung ist im Zweig Master (Branch: Master), Änderungen, die ich noch nicht akkordiert habe, im Zweig "Exploring-Data". Aber eigentlich sollte Master meistens up-to-date sein.
+Die aktuelle Fassung ist im Zweig Master (Branch: Master) zu finden. Beim Aufrufen der Seite sollte eigentlich immer der Master-Zweig automatisch eingestellt sein.
 
-Inhaltlich beginnt die Arbeit erst im Ordner "daten-exploieren". Der Ordner "daten-bereinigen" ist bloß eine komplizierte Umschichtung der Daten, damit sie bearbeitbar werden.
+Der Ordner "daten-bereinigen" ist bloß eine komplizierte Umschichtung der Daten ("data wrangling"), damit sie für R gut bearbeitbar werden. Inhaltlich beginnt die Arbeit erst im Ordner "daten-explorieren". 
 
 
 
