@@ -90,46 +90,50 @@ Untenstehendes Programm-Snippet kann sinnvollerweise nur einmal ausgeführt werd
 ```{r auspraegungen-in-variable-ueberfuehren}
 
 # i.fach
-tirol.4$V2[tirol.4$V3 == "x"] <- "1"
-tirol.4$V2[tirol.4$V4 == "x"] <- "2"
-tirol.4$V2[tirol.4$V5 == "x"] <- "3"
-tirol.4$V2[tirol.4$V6 == "x"] <- "k.A."
+tirol.4$V2[tirol.4$V3 == "x"] <- "A"
+tirol.4$V2[tirol.4$V4 == "x"] <- "B"
+tirol.4$V2[tirol.4$V5 == "x"] <- "C"
+tirol.4$V2[tirol.4$V6 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V2'] <- 'i.fach'
 
+
 # i.allgemein
-tirol.4$V7[tirol.4$V8 == "x"] <- "1"
-tirol.4$V7[tirol.4$V9 == "x"] <- "2"
-tirol.4$V7[tirol.4$V10 == "x"] <- "3"
-tirol.4$V7[tirol.4$V11 == "x"] <- "k.A."
+tirol.4$V7[tirol.4$V8 == "x"] <- "A"
+tirol.4$V7[tirol.4$V9 == "x"] <- "B"
+tirol.4$V7[tirol.4$V10 == "x"] <- "C"
+tirol.4$V7[tirol.4$V11 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V7'] <- 'i.allgemein'
 
+
 # i.schueler
-tirol.4$V12[tirol.4$V13 == "x"] <- "1"
-tirol.4$V12[tirol.4$V14 == "x"] <- "2"
-tirol.4$V12[tirol.4$V15 == "x"] <- "3"
-tirol.4$V12[tirol.4$V16 == "x"] <- "k.A."
+tirol.4$V12[tirol.4$V13 == "x"] <- "A"
+tirol.4$V12[tirol.4$V14 == "x"] <- "B"
+tirol.4$V12[tirol.4$V15 == "x"] <- "C"
+tirol.4$V12[tirol.4$V16 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V12'] <- 'i.schueler'
 
 # i.planung
-tirol.4$V17[tirol.4$V18 == "x"] <- "1"
-tirol.4$V17[tirol.4$V19 == "x"] <- "2"
-tirol.4$V17[tirol.4$V20 == "x"] <- "3"
-tirol.4$V17[tirol.4$V21 == "x"] <- "k.A."
+tirol.4$V17[tirol.4$V18 == "x"] <- "A"
+tirol.4$V17[tirol.4$V19 == "x"] <- "B"
+tirol.4$V17[tirol.4$V20 == "x"] <- "C"
+tirol.4$V17[tirol.4$V21 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V17'] <- 'i.planung'
 
+
 # i.handy
-tirol.4$V22[tirol.4$V23 == "x"] <- "1"
-tirol.4$V22[tirol.4$V24 == "x"] <- "2"
-tirol.4$V22[tirol.4$V25 == "x"] <- "3"
-tirol.4$V22[tirol.4$V26 == "x"] <- "k.A."
+tirol.4$V22[tirol.4$V23 == "x"] <- "A"
+tirol.4$V22[tirol.4$V24 == "x"] <- "B"
+tirol.4$V22[tirol.4$V25 == "x"] <- "C"
+tirol.4$V22[tirol.4$V26 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V22'] <- 'i.handy'
 
 # i.fortbildung
-tirol.4$V27[tirol.4$V28 == "x"] <- "1"
-tirol.4$V27[tirol.4$V29 == "x"] <- "2"
-tirol.4$V27[tirol.4$V30 == "x"] <- "3"
-tirol.4$V27[tirol.4$V31 == "x"] <- "k.A."
+tirol.4$V27[tirol.4$V28 == "x"] <- "A"
+tirol.4$V27[tirol.4$V29 == "x"] <- "B"
+tirol.4$V27[tirol.4$V30 == "x"] <- "C"
+tirol.4$V27[tirol.4$V31 == "x"] <- NA
 names(tirol.4)[names(tirol.4) == 'V27'] <- 'i.fortbildung'
+
 
 # sonstiges
 names(tirol.4)[names(tirol.4) == 'V32'] <- 'note.interesse'
