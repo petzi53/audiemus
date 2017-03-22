@@ -1,0 +1,140 @@
+---
+title: "04 Medienkompetenz"
+author: "Peter Baumgartner"
+date: "2017-03-22"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+
+umfrage <- readRDS("../daten/audiemus.rds")
+```
+
+
+Ich untersuche den Zusammenhang Medienkomptenz und Schultyp. Die Fragen-Batterie ist eine Einschätzung zur eigenen Medienkompetenz (computerbezogen und didaktisch), zu Medienkompetenz von Schüler/innen bzw. zur förderlichen Umgebungsbedingungen (Schule, IT-Betreuung).
+
+# PC Kompetenzen
+
+
+```{r pc.kompetenz-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = k.computer),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Einschätzung der eigenen PC Kompetenz nach Schultyp")
+bp <- bp + xlab("Einschätzung der eigenen PC Kompetenz nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Computer-Kompetenz"))
+bp
+
+
+```
+
+Zuerst einmal: Es ist wichtig, dass sich hier ein differenziertes Bild zeigt, weil ansonsten der Verdacht nahe liegen würde, dass die Befragten keine repräsentative Auswahl darstellen, sondern - wie ja vielleicht im Zusammenhang einer Internet-Plattform zu vermuten wäre - eher aus der computer-affinen Lehrer/innen-Gruppe stammen. 
+Allerdings ist es immer noch ein recht positives Bild das sich hier zeigt. Weit üer drei Viertel der Befragten schätzt die eigenen Kenntnisse zumindest als ausreichend ein. 
+
+
+# Mediendidaktik-Kompetenz
+
+
+```{r mediendidaktik-kompetenz-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = k.didaktik),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Mediendidaktik-Kompetenz nach Schultyp")
+bp <- bp + xlab("Mediendidaktik-Kompetenz nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Mediendidaktik-Kompetenz"))
+bp
+```
+
+Im Verhältnis zur PC-Kompetenz wird die eigene Medienkomptenz schlechter eingeschätzt. Das trifft sich auch mit den im Nationalen Bildungsbericht 2015 erwähnten Untersuchungen. Darin zeigte sich nämlich, dass ein sehr hoher Prozentsatz an Lehrer/innen interaktive Medien als administrative Werkzeuge und zur Unterrichtsvorbeeitung nutzen, dass aber der mediendidaktische Einsatz im Unterricht bei weitem nicht dieses Niveau erreicht.
+
+Eine Erklärung für diesen unterschiedlichen Verbreitungsgrad dürfte gerade in den unterschiedlich gelagerten Kompetenzen liegen. Zur obigen Grafik ist ja außerdem noch anzumerken, dass Erfahrung zeigt, dass selbskritische Antworten nicht leichtfertig gegeben werden. Es liegt daher die Vermutung nahe, dass die in der oben dargestellten Grafik durchwachsene Situation in der Mediendidaktik bei objektivierbaren Kompetenz-Messungstests noch etwas schlechter als die Selbsteinschätzung ausfallen würde.
+
+Dieser Vermutung sollte noch detaillierter nachgehen. Aber wie???
+
+```{r didaktik-vs-pc-kompetenz-balkendiagramm}
+# umfrage$k.computer <- recode(umfrage$k.computer, "sehr gut" = "PC sehr gut", "gut" = "PC gut", "ausreichend" = "PC ausreichend", "verbesserungswürdig" = "PC verbesserungswürdig", "schlecht" = "PC schlecht")
+# 
+# umfrage$k.didaktik <- recode(umfrage$k.didaktik, "sehr gut" = "Didaktik sehr gut", "gut" = "Didaktik gut", "ausreichend" = "Didaktik ausreichend", "verbesserungswürdig" = "Didaktik verbesserungswürdig", "schlecht" = "Didaitk schlecht")
+
+bp <- ggplot(umfrage, aes(k.didaktik, fill = k.didaktik)) +
+        geom_bar() + 
+        theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
+        facet_wrap(~k.computer)
+bp <- bp + ggtitle("Einschätzung PC- versus Mediendidaktik-Kompetenz")
+bp <- bp + xlab("Mediendidaktik-Kompetenz")
+bp <- bp + ylab("PC-Kompetenz")
+bp <- bp + guides(fill = FALSE)
+bp
+```
+
+Die Grafik zeigt eine leicht bessere Einschätzung zur Computer-Kompetenz versus Medien-Kompetenz. 
+
+* 6 Befragte schätzen sich in Didaktik besser als mit dem PC allgemein ein
+* 10 Befragte hingegen sehen sich in der PC besser als in der Didaktik-Kompetenz
+* Der Rest, die andere Hälfte bewertet die Kompetenzen in beiden Bereichen gleich.
+
+
+# Motivation für Medieneinsatz im Unterricht
+
+```{r motivation-medieneinsatz2-standardisiertes-balkendiagramm}
+bp <- ggplot(data = umfrage) +
+        geom_bar(
+                mapping = aes(x = schultyp, fill = k.motivation),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Motivation zum Medieneinsatz im Unterricht nach Schultyp")
+bp <- bp + xlab("Motivation zum Medieneinsatz im Unterricht nach Schultyp")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Motivation"))
+bp
+```
+
+Die Motivation und das Engagement in der AHS ist deutlich geringer als in den beiden anderen Schultypen.
+
+```{r motivation-medieneinsatz-standardisiertes-balkendiagramm}
+bp <- ggplot(data = subset(umfrage, !is.na(k.didaktik))) + 
+        geom_bar(
+                mapping = aes(x = k.motivation, fill = k.didaktik),
+                position = "fill"
+                )
+bp <- bp + ggtitle("Motivation zum Medieneinsatz im Unterricht nach Didaktik-Kompetenz")
+bp <- bp + xlab("Motivation zum Medieneinsatz im Unterricht")
+bp <- bp + ylab("Porportion")
+bp <- bp + guides(fill = guide_legend(title = "Didaktik-Kompetenz"))
+bp
+```
+
+Das ist insofern ein interessantes Ergebnis, als sich darin deutlich wiederspiegelt, dass die Motivation Medien im Unterricht einzusetzen, stark mit der Einschätzung der eigenen Mediendidaktik-Kompetenz zusammenhängt.
+
