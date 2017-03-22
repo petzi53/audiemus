@@ -9,6 +9,16 @@ Es wird geprüft inwieweit die Daten für einen Artikel auf der Freiburg-Konfere
 ***
 # Nutzung des Repositoriums
 
+## Welche Unterlagen gibt es?
+
+* [audiemus-fragebogen.pdf](https://github.com/petzi53/audiemus/blob/master/dateien/audiemus-fragebogen.pdf): Fragebogen (388.5 kB), wie er verschickt wurde. Ohne Codierung! 
+* [audiemus-umfrage.tirol.xslx](https://github.com/petzi53/audiemus/raw/master/dateien/audiemus-umfrage-tirol.xlsx): Ursprüngliches Excel-File (25.4 kB), das von SchülerInnen an Hand der entsprechenden Ergebnisse der Umfrage über [SurveyMonkey](https://de.surveymonkey.com/results/SM-2WD2HRDG/) erstellt wurde.
+* [audiemus-tirol.xlsx](https://github.com/petzi53/audiemus/raw/master/dateien/audiemus-tirol.xlsx): Excel-File (17.4 kB) für die Datenauswertung bereits aufbereitet mit drei Reitern: 
+    - Excel-Blatt mit Codering (z.B. A, B, C, D, E), 
+    - Excel-Blatt mit faktorisierten Variablen (z.B. sehr gut, gut, ausreichend, schlecht, nicht vorhanden)
+    - Excel-Blatt mit kommentierten Antworten (muss noch durchgesehen und für Datenauswertung aufbereitet werden.)
+
+
 ## Welche Dateien lesen?
 
 1. Dateien mit der Endung ".md" können direkt eingesehen werden. Sie zeigen den Fließtext an, nicht jedoch die Ergebnisse aus der R Programmierung.
