@@ -36,10 +36,7 @@ if (!require("pander"))
 
 ```
 
-# Daten explorieren
-
-## Daten einspielen
-
+# Daten einspielen
 
 Die Daten sind nun in einem R lesbaren Format bereinigt und als `tidy data` vorhanden. Sie können nun in R geladen werden.
 
@@ -49,6 +46,7 @@ umfrage <- readRDS("../daten/umfrage.rds")
 
 ```
 
+
 Die Daten können nun entsprechend ihrer Struktur inspiziert werden.
 
 ```{r inspiziere-daten}
@@ -56,12 +54,12 @@ str(umfrage)
 ```
 
 ```{r}
-umfrage$t.pc.nein <- as.factor(umfrage$t.pc.nein)
-nlevels(umfrage$t.pc.nein)
-levels(umfrage$t.pc.nein)
-class(umfrage$t.pc.nein)
-typeof(umfrage$t.pc.nein)
-attr(umfrage$t.pc.nein, "levels")
+ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar() 
+ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
+        geom_bar() + 
+        theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
+        facet_wrap(~schultyp)
 ```
 
 
@@ -80,7 +78,24 @@ Der Datensatz gliedert sich in 5 große Bereiche:
 # Explorative Beschreibung durch Visualisierung
 
 ## Allgemeine Anmerkung
-Die deskriptive Auswertung der einzelnen Variablen gibt es bereits bei SurveyMonkey. Trotzdem ist es vielleicht sinnvoll, diese Grafiken hier nochmals darzustellen und für einen Bericht schön aufzubereiten. Im Augenblick allerdings dienen die Grafiken nur der visuellen Exploration und dem Generieren von Ideen für Zusammenhänge. Deshalb achte ich zur Zeit auch nicht auf gefälliges Aussehen, verwende weder Farbe noch Legende und z.T. nicht einmal eine Beschriftung.
+Die deskriptive Auswertung der einzelnen Variablen gibt es bereits bei SurveyMonkey. Trotzdem ist es vielleicht sinnvoll, diese Grafiken hier nochmals darzustellen und für einen Bericht schön aufzubereiten. Im Augenblick allerdings dienen die Grafiken nur der visuellen Exploration und dem Generieren von Ideen für Zusammenhänge. Deshalb achte ich zur Zeit auch nicht auf optimales Aussehen.
+
+Die nachfolgenden Grafiken sind erst rudimentär ausgearbeitet. Das betrifft insbesondere 
+
+* Titel und Untertitel und eventuelle Referenz der Grafik
+* Größen (Länge/Breite)
+* Beschriftung der Axen
+* Text und Darstellung der Legende
+* Graustufen (Druck) bzw. Farbskala (auch für Farbbline!)
+* etc.
+
+Allerdings versuche ich eine prototypischen Grafik zu entwickeln, die alle Elemente, die für die spätere Darstellung wichtig sind, bereits enthält. Die entsprechenden Elemente haben noch keine inhalltiche Genauigkeit, sondern sind nur als Platzhalter gedacht. 
+
+## Entwicklung eines Prototyps für die grafische Darstellung
+
+### Balkendiagramm
+
+Für die Darstellung von qualitativen Variablen eigenen sich am Besten Balkendiagramme. 
 
 ## Verteilung nach Schultyp
 
@@ -101,9 +116,10 @@ Frage: "Wie ist Ihre Schule aus digitaler Sicht technisch ausgerüstet?"
 
 ```{r}
 ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
-        geom_bar()
+        geom_bar() 
 ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
-        geom_bar() +
+        geom_bar() + 
+        theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
         facet_wrap(~schultyp)
 ```
 Die Ausstattung mit PC ist relativ gut. Nur 6 Schulen meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
@@ -126,5 +142,8 @@ ggplot(umfrage, aes(t.pc.nein, fill = t.pc.nein)) +
         geom_bar() +
         scale_fill_discrete(labels = c("Eins", "Zwei", "Drei", "Vier", "Fünf") ) +
         scale_x_discrete(labels = c("Eins", "Zwei", "Drei", "Vier", "Fünf") )
+
+ggplot(umfrage, aes(t.pc.nein, fill = t.pc.nein)) +
+        geom_bar()
 ```
 
