@@ -41,6 +41,10 @@ Ich untersuche den Zusammenhang Medienkomptenz und Schultyp. Die Fragen-Batterie
 
 # PC Kompetenzen
 
+```{r table-kompetenz-computer-nach-schultyp}
+table(umfrage$schultyp, umfrage$k.computer)
+```
+
 
 ```{r pc.kompetenz-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
@@ -62,6 +66,10 @@ Allerdings ist es immer noch ein recht positives Bild das sich hier zeigt. Weit 
 
 
 # Mediendidaktik-Kompetenz
+
+```{r table-kompetenz-didaktik-nach-schultyp}
+table(umfrage$schultyp, umfrage$k.didaktik)
+```
 
 
 ```{r mediendidaktik-kompetenz-standardisiertes-balkendiagramm}
@@ -107,6 +115,10 @@ Die Grafik zeigt eine leicht bessere Einschätzung zur Computer-Kompetenz versus
 
 
 # Motivation für Medieneinsatz im Unterricht
+
+```{r table-motivation-nach-schultyp}
+table(umfrage$schultyp, umfrage$k.motivation)
+```
 
 ```{r motivation-medieneinsatz2-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
