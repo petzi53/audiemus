@@ -86,8 +86,8 @@ bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
 bp <- bp + ylab("Anzahl")
 bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
 bp
-
 ```
+
 Die Ausstattung mit PC ist relativ gut. Nur 6 Befragate meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
 
 ## Balkendiagramm standardisiert
@@ -105,7 +105,10 @@ bp <- bp + xlab("Ausstattung mit raumgebundenen PC-Arbeitsplätzen")
 bp <- bp + ylab("Porportion")
 bp <- bp + guides(fill = guide_legend(title = "PC Arbeitsplätze"))
 bp
+
 ```
+
+
 
 Diese Grafik ist schon recht gelungen. Ich habe auch bereits Titel, Achsen und Legende beschrieben und fabrlich codiert. Das kann als erster Protyp für die weitere Exploration dienen. 
 

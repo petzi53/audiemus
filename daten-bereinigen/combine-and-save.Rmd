@@ -273,6 +273,7 @@ audiemus$e.praktikabel <- factor(audiemus$e.praktikabel)
 audiemus$e.praktikabel <- recode(audiemus$e.praktikabel, "A" = "trifft voll zu", "B" = "trifft weitgehend zu", "C" = "trifft überwiegend zu","D" = "trifft eher nicht zu", "E" = "trifft gar nicht zu")
 
 str(audiemus)
+summary(audiemus)
 ```
 
 # Spalten nach Reihung im Fragebogen sortieren
