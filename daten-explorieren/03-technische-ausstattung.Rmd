@@ -53,9 +53,13 @@ Ich untersuche nachfolgend die technische Ausstattung nach  Schultyp
 
 ## PC Arbeitsplätze raumgebunden
 
-```{r}
-# ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
-#         geom_bar() 
+
+```{r tabelle-pc-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.pc.ja)
+```
+
+
+```{r plot-pc-ausstattung-nach-schultyp}
 bp <- ggplot(umfrage, aes(t.pc.ja, fill = t.pc.ja)) +
         geom_bar() + 
         theme(axis.text.x = element_text(angle = -30, vjust = 1, hjust = 0)) +
@@ -70,6 +74,10 @@ bp
 Die Ausstattung mit PC ist relativ gut. Nur 6 Befragate meinen, dass sie ausbaufähig (3) sei. Schlechtere Bewertungen aus "ausbaufähig" gibt es nicht.
 
 Besser als obige Darstellung ist jedoch eine Grafik, wo es für jeden Schultyp nur einen Balken gibt, der sich nach diesen drei Abstufen farblich unterteilt und sich - zum besseren Vergleich - bei allen drei Schultypen zu einer Normgröße (= Gesamtzahl der Antworten dieser Schultype bzw. 100% in dieser Kategorie) aufsummiert. 
+
+```{r table-pc-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.pc.ja)
+```
 
 
 ```{r pc.ausstattung-standardisiertes-balkendiagramm}
@@ -96,6 +104,11 @@ Das wäre jetzt noch mit der aktuellen Infrastrukturerhebung zu validieren.
 
 ## PC's vorhanden, aber Räume nicht zugänglich
 
+```{r table-pc-keine-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.pc.nein)
+```
+
+
 ```{r pc.keine.ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
         geom_bar(
@@ -114,6 +127,12 @@ bp
 Diese Grafik ist schwierig zu interpretieren, weil die Frage ungeschickt formuliert ist: "Ausstattung mit zu wenig aktuellen PC-Arbeitsplätzen (raumgebunden) - häufig belegt und daher selten nutzbar". Besser wäre z.B. die einfache Frage gewesen: "PC-Räume sind häufig belegt".
 
 ## PCs mobil (Laptop, Tablet)
+
+```{r table-tablet-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.tablet)
+```
+
+
 
 ```{r tablet-ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
@@ -134,6 +153,11 @@ Diese Abbildung bestätigt die Ansicht, dass die Ausstattung als recht positiv e
 
 ## LAN Qualität
 
+
+```{r table-lan-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.lan)
+```
+
 ```{r lan-ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
         geom_bar(
@@ -150,6 +174,10 @@ bp
 
 
 ## WLAN
+
+```{r table-wlan-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.wlan)
+```
 
 ```{r wlan-ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
@@ -168,6 +196,10 @@ bp
 
 ## Beamer und Lautsprecher
 
+```{r table-beamer-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.beamer)
+```
+
 ```{r beamer-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
         geom_bar(
@@ -184,6 +216,10 @@ bp
 Wie wichtig sind Lautsprecher für die Nutzung von _audiemus_? Mir scheint, dass für individuelle Übungen die wichtiger Komponente eher der Kopfhörer darstellt.
 
 ## Whiteboard
+
+```{r table-whiteboard-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.whiteboard)
+```
 
 
 ```{r whiteboard-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
@@ -205,6 +241,10 @@ Whiteboards sind meiner Ansicht für die Nutzung von _audiemus_ nicht von große
 
 ## Kopfhörer
 
+```{r table-kopfhoerer-ausstatunng-nach-schultyp}
+table(umfrage$schultyp, umfrage$t.kopfhoerer)
+```
+
 
 ```{r kopfhoerer-lautsprecher-ausstattung-standardisiertes-balkendiagramm}
 bp <- ggplot(data = umfrage) +
@@ -220,3 +260,5 @@ bp
 ```
 
 Kopfhörer sind für die individuelle Nutzung von _audiemus_ in der Klasse essentiell. Hier sieht die Situation - zum Unterschied von der PC Ausstattung nicht so gut aus. Ich habe überhaupt den Eindruck, dass es beim  Zubehör schlechter steht, als mit der PC Ausstattung.
+
+
