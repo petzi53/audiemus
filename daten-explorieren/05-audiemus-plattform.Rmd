@@ -1,7 +1,7 @@
 ---
-title: "04 Medienkompetenz"
+title: "05 Audiemus-Plaattform"
 author: "Peter Baumgartner"
-date: "2017-03-22"
+date: "2017-03-23"
 output: 
         html_notebook:
                 toc: yes
@@ -37,12 +37,16 @@ umfrage <- readRDS("../daten/audiemus.rds")
 ```
 
 
-Ich untersuche den Zusammenhang Medienkomptenz und Schultyp. Die Fragen-Batterie ist eine Einschätzung zur eigenen Medienkompetenz (computerbezogen und didaktisch), zu Medienkompetenz von Schüler/innen bzw. zur förderlichen Umgebungsbedingungen (Schule, IT-Betreuung).
+# Einsatz von Audiemus
 
-# PC Kompetenzen
+```{r table-a.eingesetzt-schultyp}
+library(forcats)
+table(umfrage$a.eingesetzt, umfrage$schultyp, useNA = "ifany")
+table(umfrage$t.pc.nein, umfrage$schultyp, useNA = "ifany")
+table(umfrage$t.pc.ja, umfrage$schultyp, useNA = "always")
+fct_count(umfrage$a.eingesetzt)
+count(umfrage, a.eingesetzt)
 
-```{r table-kompetenz-computer-nach-schultyp}
-table(umfrage$schultyp, umfrage$k.computer)
 ```
 
 

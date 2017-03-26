@@ -69,6 +69,7 @@ bp <- bp + guides(fill = guide_legend(title = "Schultyp"))
 bp
 ```
 
+
 ## Balkendiagramm (Facetten-Darstelluung)
 
 Eine Variable (wie z.B. `schultyp` kann auch mit einer weiteren Variablen (z.B. Ausstattung mit PCs) zusammen dargestellt werden.
@@ -108,7 +109,12 @@ bp
 
 ```
 
-
-
 Diese Grafik ist schon recht gelungen. Ich habe auch bereits Titel, Achsen und Legende beschrieben und fabrlich codiert. Das kann als erster Protyp für die weitere Exploration dienen. 
+
+# Überlegungen
+
+Boxplots erfordern kontinuierliche Variable, die bei der _audiemus_-Umfrage nicht vorkommen. 
+
+Wie aber kann ich trotzdem eine Vergleichbarkeit über verschiedene Items erreichen? Ich möchte z.B. eine Darstellung haben, die alle Items zur technischen Ausstattung nebeneinander in einer Grafik darstellt.
+
 
