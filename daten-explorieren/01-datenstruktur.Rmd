@@ -70,13 +70,32 @@ Der Datensatz gliedert sich in 5 große Bereiche:
 summary(umfrage)
 ```
 
-Eine erste Zusammenstellung der Verteilungen aller Variablen. Das ist im Allgemeinen nicht besonders hilfreich. Zwei Punkte sind aber vielleicht trotzdem beachtentswert.
+Eine erste Zusammenstellung der Verteilungen aller Variablen. Das ist im Allgemeinen nicht besonders hilfreich. Einige Punkte sind aber vielleicht trotzdem beachtentswert.
 
-1. 11 Personen von den 32 haben audiemus bereits eingesetzt (`a.eingesetzt`). Das ist eigentlich ein sehr hoher Prozentsatz und wahrscheinlich nicht über-repräsentativ für die Gesamtzahl von Deutschlehrer/innen. Andererseits aber ist verständlich, dass Nutzer/innen von _audiemus_ natürlich stärker motiviert sind. 
+1. 11 Personen von den 32 haben audiemus bereits eingesetzt (`a.eingesetzt`). Das ist eigentlich ein sehr hoher Prozentsatz und wahrscheinlich überproportional und daher nicht repräsentativ für die Gesamtzahl von Deutschlehrer/innen. (Was ist die Grundgesamt, d.h. die Gesamtheit aller Deutschlehrer/innen in Tirol? Diese Zahl fehlt noch.) Andererseits aber ist verständlich, dass Nutzer/innen von _audiemus_ natürlich stärker zum Ausfüllen des Fragebogens motiviert sind. 
 
-2. Weil 11 Personen _audiemus_ nutzen, müssen alle weitere Fragen die mit "a." beginnen, als Grundgesamt jene Leute nehmen, die _audiemus_ noch nicht benutzt haben. Umgekehrt beziehen sich die Erfahrungsfragen "e." auf die 11 Nutzer/innen. Die hohe Zahl an NAs ist natürlich auch dadurch bedingt.
+2. Weil 11 Personen _audiemus_ nutzen, müssen alle weitere Fragen die mit "a." beginnen, als Grundgesamtheit jene Leute nehmen, die _audiemus_ noch nicht benutzt haben. Umgekehrt beziehen sich die Erfahrungsfragen "e." auf die 11 Nutzer/innen. Die hohe Zahl an NAs in diesen beiden Fragegruppen ist natürlich auch dadurch bedingt.
 
-3. In diesem Zusammenhang ist mir aufgefallen, dass es hier einen Fehler in der Excel-Tabelle gibt. In SurveyMonkey haben 3 Leute diese Frage übersprungen. Das hätte als `NA` sichtbar sein sollen. Eine Kontrolle im originalen Excel-Sheet zeigt mir aber, dass alle 32 Leute mit JA/NEIN ausgefüllt wurden. Da muss etwas falsch sein!
+3. Statt einer Mehrfachauswahl, warum _audiumus_ nicht genutzt worden ist, wäre eine Abfrage mit "trifft zu/trifft nicht zu" wahrscheinlich besser gewesen, weil die NAs dann besser kontrolliert werden hätte können. Insgesamt gibt es nämlich dazu nur 8 Antworten.
+
+```{r}
+table(umfrage$a.keine.zeit)
+table(umfrage$a.kein.interesse)
+table(umfrage$a.keine.kompetenz)
+# count(umfrage, a.keine.zeit, a.kein.interesse, a.keine.kompetenz)
+# table(umfrage$a.keine.technik)
+# table(umfrage$a.zu.kompliziert)
+umfrage$a.keine.zeit
+umfrage$a.kein.interesse
+umfrage$a.keine.kompetenz
+count(umfrage, a.keine.zeit)
+```
+
+
+In diesem Zusammenhang ist mir aufgefallen, dass es hier einen Fehler in der Excel-Tabelle gibt. In SurveyMonkey haben 3 Leute diese Frage übersprungen. Das hätte als `NA` sichtbar sein sollen. Eine Kontrolle im originalen Excel-Sheet zeigt mir aber, dass alle 32 Leute mit JA/NEIN ausgefüllt wurden. 
+
+Dieser Fehler wurde inzwischen durch eine Nachkontrolle korrigert. Dabei wurde alles kontrolliert und gleich auch andere Eingabefehler, die gefunden wurden, beseitigt. Das zeigt mir, dass unbedingt eine genaue Kontrolle der Daten **vor** dem Beginn der Analyse stattzufinden hat.
+
 
 ```{r}
 library(forcats)
