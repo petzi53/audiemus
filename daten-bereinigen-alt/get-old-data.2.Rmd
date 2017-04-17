@@ -1,0 +1,158 @@
+---
+title: "Daten bereinigen (2)"
+author: "Peter Baumgartner"
+date: "2017-03-19"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+
+
+```
+
+# Daten bereinigen
+
+## Daten einspielen
+
+
+Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei hat 5 Blätter (sheets). Ich lade vorerst nur das erste Blatt in R ein und speichere es in ein für R lesbares Format ab. 
+
+
+```{r load-first-sheet-of-excel-file-into-r-memory}
+
+umfrage.2 <- read_excel(
+        "../daten/umfrage-tirol-36tn.xlsx",
+        sheet = 2,
+        col_names = TRUE,
+        col_types = NULL,
+        na = "",
+        skip = 0
+        )
+saveRDS(umfrage.2, file = "../daten/umfrage-tirol.2.rds")
+
+```
+
+## Grundsätzliche Überlegungen zur Datenstruktur
+Leider sind die Daten in einer nicht zu bearbeitenden Form erfasst worden. Richtig wäre gewesen: 
+
+* Es gehört für jede befragte Person (= Beobachtung) eine eine Zeile. 
+* Es gehört für jede Frage (= Variable) eine eigene Spalte, in der dann die entsprechende Ausprägung der Antwort eingetragen wird.
+
+Statt dessen wurden Personen als Spalten geführt und die Fragen als Zeilen. Dazu kommt auch noch, dass die für jede einzelne Ausprägung eine eigene Zeile genommen wurde, was zu einer großen Anzahl leerer Felder führt, die als `NA`s (data "Not Available"") interpretiert werden.
+
+Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumt"" werden. Dieses Konzept heißt [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
+
+Für die weiteren Transformationen der Datei lege ich ein neues Datenset an, das ich `tirol` nenne.
+Der erste Schritt ist es, dass Zeilen und Spalten verdreht werden. Dies geschieht mit der Funktion `t` (= transpose). `t` erzeugt eine Matrix; ich bevorzuge aber weiterhin im `tibble`-Format zu bleiben. 
+
+```{r}
+tirol.2 <- as_tibble(t(umfrage.2))
+```
+
+Als Ergebnis bekomme ich nun ein Datenset, wo für jede Spalte eine Variable vorgesehen wird. Allerdings ist nicht nur der Text der Frage eine Variable, sondern auch jeder ihrer möglichen Antworten. Die Merkmalsausprägungen gehören zusammen mit der Frage zu einer einzigen Variablen zusammengefasst.
+
+Ein Beispiel: Die Fragen "An welchem Schultyp unterrichten Sie?" (V2) hat die Ausprägungen `AHS`, `NMS` und `PTS` (V3, V4, V5) und gehört zu einer Variablen `schultyp` zusammengefasst. Das heißt V2 bis V5 gehört zu einer Variable `schultyp` zusammen gefasst. Die Herausforderung dabei ist, dass die jeweiligen Kreuze in den Variablen mit dem jeweiligen Wert der Ausprägung ersetzt werden muss.
+
+Dazu muss die entsprechende Variable selektiert werden und jedes "x" mit dem entsprechenden Wert der jeweiligen Spalte überschrieben werden. Also beispielsweise müssen alle "x" in Variable V3 mit "AHS", alle "x" in V4 mit "NMS" und alle V5 mit "PTS" ersetzt werden. Außerdem müssen  diese  Ergebnisse in einer einzigen Variable zusammengefasst werden. Danach kann sowohl die Frage (V2) als auch die nicht mehr benötigten anderen Variablen dieser Frage gelöscht werden. Schlussendlich noch kann die entsprechende - nun korrekt ausgefüllte - Variable in `schultyp` umbenannt werden. Gleichzeitig muss ein Code-Buch entwickelt werden, in dem die Fragestellung, der Code der Variable und die Ausprägungen eingetragen werden.
+
+## Ausprägungen in Variable überführen
+
+Untenstehendes Programm-Snippet kann sinnvollerweise nur einmal ausgeführt werden. Ich habe es deshalb als Kommentar `#` inaktiv gesetzt.
+
+```{r auspraegungen-in-variable-ueberfuehren}
+
+# k.computer
+tirol.2$V1[tirol.2$V2 == "x"] <- "A"
+tirol.2$V1[tirol.2$V3 == "x"] <- "B"
+tirol.2$V1[tirol.2$V4 == "x"] <- "C"
+tirol.2$V1[tirol.2$V5 == "x"] <- "D"
+tirol.2$V1[tirol.2$V6 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V1'] <- 'k.computer'
+
+
+# k.didaktik
+tirol.2$V7[tirol.2$V8 == "x"] <- "A"
+tirol.2$V7[tirol.2$V9 == "x"] <- "B"
+tirol.2$V7[tirol.2$V10 == "x"] <- "C"
+tirol.2$V7[tirol.2$V11 == "x"] <- "D"
+tirol.2$V7[tirol.2$V12 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V7'] <- 'k.didaktik'
+
+
+# k.motivation
+tirol.2$V13[tirol.2$V14 == "x"] <- "A"
+tirol.2$V13[tirol.2$V15 == "x"] <- "B"
+tirol.2$V13[tirol.2$V16 == "x"] <- "C"
+tirol.2$V13[tirol.2$V17 == "x"] <- "D"
+tirol.2$V13[tirol.2$V18 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V13'] <- 'k.motivation'
+
+
+# k.schueler
+tirol.2$V19[tirol.2$V20 == "x"] <- "A"
+tirol.2$V19[tirol.2$V21 == "x"] <- "B"
+tirol.2$V19[tirol.2$V22 == "x"] <- "C"
+tirol.2$V19[tirol.2$V23 == "x"] <- "D"
+tirol.2$V19[tirol.2$V24 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V19'] <- 'k.schueler'
+
+
+# k.schule
+tirol.2$V25[tirol.2$V26 == "x"] <- "A"
+tirol.2$V25[tirol.2$V27 == "x"] <- "B"
+tirol.2$V25[tirol.2$V28 == "x"] <- "C"
+tirol.2$V25[tirol.2$V29 == "x"] <- "D"
+tirol.2$V25[tirol.2$V30 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V25'] <- 'k.schule'
+
+
+# k.it.betreuung
+tirol.2$V31[tirol.2$V32 == "x"] <- "A"
+tirol.2$V31[tirol.2$V33 == "x"] <- "B"
+tirol.2$V31[tirol.2$V34 == "x"] <- "C"
+tirol.2$V31[tirol.2$V35 == "x"] <- "D"
+tirol.2$V31[tirol.2$V36 == "x"] <- "E"
+names(tirol.2)[names(tirol.2) == 'V31'] <- 'k.it.betreuung'
+
+```
+
+Wie oben gehört jetzt entsprechend mit jeder Variablen verfahren. Gleichzeitig müsste jedoch die Code-Tabelle erstellt werden. Das mache ich später, bzw. könnte ich delegieren.
+
+```{r loesche-ueberfluessige-spalten}
+
+tirol.2 <- slice(tirol.2, 3:n())
+tirol.2[c(2:6, 8:12, 14:18, 20:24, 26:30, 32:37)] <- list(NULL)
+```
+
+# Datensatz bereinigt speichern
+
+
+```{r speichere-bereinigte-datei-unter-neuen-namen}
+saveRDS(tirol.2, file = "../daten/tirol.2.rds")
+```
