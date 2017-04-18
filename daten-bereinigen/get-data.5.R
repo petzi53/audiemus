@@ -1,16 +1,4 @@
----
-title: "Daten bereinigen (5)"
-author: "Peter Baumgartner"
-date: "2017-03-19"
-output: 
-        html_notebook:
-                toc: yes
-                toc_depth: 3
-                
----
-***
-
-```{r label = "global-options", echo=FALSE, highlight=TRUE}
+## ----label = "global-options", echo=FALSE, highlight=TRUE----------------
 knitr::opts_chunk$set(
         message = F,
         error = F,
@@ -37,16 +25,8 @@ if (!require("forcats"))
         library(forcats)}
 
 
-```
 
-# Datenbereinigen
-
-## Daten einspielen
-
-Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei hat fünf Blätter (sheets). Ich lade in dieser Datei das fünfte Blatt in R ein und speichere es in ein für R lesbares Format ab. 
-
-
-```{r load-first-sheet-of-excel-file-into-r-memory}
+## ----load-first-sheet-of-excel-file-into-r-memory------------------------
 
 umfrage.5 <- read_excel(
         "../daten/umfrage-tirol-36tn.xlsx",
@@ -58,70 +38,12 @@ umfrage.5 <- read_excel(
         )
 saveRDS(umfrage.5, file = "../daten/umfrage-tirol.5.rds")
 
-```
 
-## Grundsätzliche Überlegungen zur Datenstruktur
-Leider sind die Daten in einer nicht zu bearbeitenden Form erfasst worden. Richtig wäre gewesen: 
-
-* Es gehört für jede befragte Person (= Beobachtung) eine eine Zeile. 
-* Es gehört für jede Frage (= Variable) eine eigene Spalte, in der dann die entsprechende Ausprägung der Antwort eingetragen wird.
-
-Statt dessen wurden Personen als Spalten geführt und die Fragen als Zeilen. Dazu kommt auch noch, dass die für jede einzelne Ausprägung eine eigene Zeile genommen wurde, was zu einer großen Anzahl leerer Felder führt, die als `NA`s (data "Not Available"") interpretiert werden.
-
-Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumt"" werden. Dieses Konzept heißt [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
-
-Für die weiteren Transformationen der Datei lege ich ein neues Datenset an, das ich `tirol` nenne.
-Der erste Schritt ist es, dass Zeilen und Spalten verdreht werden. Dies geschieht mit der Funktion `t` (= transpose). `t` erzeugt eine Matrix; ich bevorzuge aber weiterhin im `tibble`-Format zu bleiben. 
-
-```{r vertausche-reihen-und-spalten}
+## ----vertausche-reihen-und-spalten---------------------------------------
 tirol.5 <- as_tibble(t(umfrage.5))
 umfrage.t.5 <- as_tibble(t(umfrage.5)) # um Namen der Variablen nachzusehen
-```
 
-Als Ergebnis bekomme ich nun ein Datenset, wo für jede Spalte eine Variable vorgesehen wird. Allerdings ist nicht nur der Text der Frage eine Variable, sondern auch jeder ihrer möglichen Antworten. Die Merkmalsausprägungen gehören zusammen mit der Frage zu einer einzigen Variablen zusammengefasst.
-
-Ein Beispiel: Die Fragen "An welchem Schultyp unterrichten Sie?" (V2) hat die Ausprägungen `AHS`, `NMS` und `PTS` (V3, V4, V5) und gehört zu einer Variablen `schultyp` zusammengefasst. Das heißt V2 bis V5 gehört zu einer Variable `schultyp` zusammen gefasst. Die Herausforderung dabei ist, dass die jeweiligen Kreuze in den Variablen mit dem jeweiligen Wert der Ausprägung ersetzt werden muss.
-
-Dazu muss die entsprechende Variable selektiert werden und jedes "x" mit dem entsprechenden Wert der jeweiligen Spalte überschrieben werden. Also beispielsweise müssen alle "x" in Variable V3 mit "AHS", alle "x" in V4 mit "NMS" und alle V5 mit "PTS" ersetzt werden. Außerdem müssen  diese  Ergebnisse in einer einzigen Variable zusammengefasst werden. Danach kann sowohl die Frage (V2) als auch die nicht mehr benötigten anderen Variablen dieser Frage gelöscht werden. Schlussendlich noch kann die entsprechende - nun korrekt ausgefüllte - Variable in `schultyp` umbenannt werden. Gleichzeitig muss ein Code-Buch entwickelt werden, in dem die Fragestellung, der Code der Variable und die Ausprägungen eingetragen werden.
-
-## Ausprägungen in Variable überführen
-
-In diesem Dateset gibt es nun --- gegenüber den vier anderen Excel-Blättern einige Besonderheiten. 
-
-**Frage 1:**
-
-Die Frage "Setzen Sie in Ihrem Deutschunterricht digitale Medien ein?" muss in ihrer Antwortreihefolge geändert werden, damit auch diese Frage als _geordnete_ kategoriale Variable angesehen werden kann. Die Reihenfolge "ja, nein, manchmal, fast nie" muss in "ja, manchmal, fast nie, nein" umsortiert werden.
-
-**Frage 5:**
-
-"Wenn Sie die Hörplattform audiemus NICHT in ihrem Unterricht eingesetzt haben --- warum nicht? (mehrere Antwortmöglichkeiten)" muss aus zwei Gründen besonders behandelt werden. 
-
-Diese Frage wurde in der Excel-Datei in ihrer Struktur falsch organisiert: Statt "trifft zu" bzw. "trifft nicht zu" wurde eine Rangordnung mit "trifft voll zu", "trifft weitgehend zu" etc. vorgesehen. Da aber dann immer nur "trifft voll zu" ausgefüllt wurde, konnte dies leicht behoben werden.
-
-1. Es ist zwischen dem Nicht-Ankreuzen eines der sechs Items und ein völliges Überspringen der Antwort (keine Antwort = NA) zu unterscheiden. Dazu muss das Antwortverhalten insgesamt angesehen werden: Gibt es weder bei den Items noch bei "Sonstiges" eine Antwort, dann muss 'NA' codiert werden. Bei allen anderen Fällen muss ein Nicht-Ankreuzen eines der sechs Items als "nein" (d.h. "trifft nicht zu") gewertet werden.
-
-2. Die Antworten unter "Sonstiges" müssen ebenfalls kategorisiert und entsprechend codiert werden. Es zeigt sich, dass bis auf einen Fall "Beispiele zum Deutschbuch, zu wenig Stunden, andere Portale" die Antorten auf "Plattform (bisher) unbekannt" reduziert werden können. Auch Antworten wie "noch keine Zeit gehabt, mich damit auseinander zu setzen", sind mit "unbekannt" zu codieren. In diesem Zusammenhang fällt auf, dass das Item "keine Zeit" unterschiedlich interpretiert werden kann:
-    a) Keine Zeit im Unterricht --- z.B. wegen großer Stofffülle --- die Plattform einzusetzen und
-    b) Keine Zeit in der eigenen Vorbereitung sich damit auseinander zu setzen.
-
-Unabhängig welche Interpretation gewählt wurde, bleibt die Grundintention des Zeitmangels-Items bestehen: Keine entsprechende Prioritätensetzung. 
-
-**Zusammenfassung:** Nach einer Durchsicht des jeweiligen Antwortverhaltens der einzelnen Teilnehmer/innen wurde die Frage 5 in zweifacher Weise recodiert:
-
-1. Die "Plattform nicht gekannt"-Anmerkungen unter "Sonstiges" wurden in einer eigenen Variablen `a.unbekannt` zusammengefasst.
-2. Die Frage ist nur zu beantworten, wenn die Frage 4 "Haben Sie die Hörplattform 'audiemus' in Ihrem Deutschunterricht eingesetzt?" Wurde die Frage mit "ja" beantwortet, dann können alle Items von Frage 5 mit `nutze audiemus` kodiert werden.
-3. Nur wenn Frage 4 mit "nein" **und** kein einziges Item der Antwortmöglichkeiten von Frage 5 ausgefüllt wurden, soll eine Nicht-Beantwortung der einzelnen Items als `NA` kodiert werden.
-
-Wichtig ist die Reihefolge der Codierung:
-
-1. Wenn "audiemus" benutzt wird, sind alle 5 Items der Frage 5 mit `nutze audiemus` codieren. Damit gibt es kein `NA` mehr für diese Items. Das ist für die späteren Abfragen wichtig und muss daher am Beginn der Recodierung stehen.
-2. Wenn es irgendwo bei den 5 Items eine Antwort "trifft zu" gab, dann sind die anderen `NA`-Items als "trifft nicht zu" zu beantworten. Damit ich diese Peronen finde, habe ich das originale Excel-Sheet in der Spalte `note.audiemus` mit dem Schlüsselwort `Antwort` versehen.
-3. Wenn es nur im Feld `note.audiemus` eine Antwort gab, dann sind ebenfalls alle `NA`-Items als "trifft nicht zu". Aber Achtung: Die Abfrage mit dem Feld `note.audiemus` muss von der Meldung `k.A.`, die ich händisch eingefügt unterschieden. `k.A.` bedeutet, dass kein Item dieser Frage beantwortet wurde (also alle Items ein `NA` führen) und gleichzeitig aber die Frage 4 mit `nein` beantwortet wurde.
-
-Wichtig ist auch noch anzumerken, dass die Abfrage zu `NA`s nicht mit Operatoren (`==` oder `!=`) möglich ist. sondern `ìs.na()` verwendet werden muss, z.B. `is.na(tirol.5$a.kein.interesse)`.
-
-
-```{r auspraegungen-in-variable-ueberfuehren}
+## ----auspraegungen-in-variable-ueberfuehren------------------------------
 
 # medien.deutsch = FRAGE 1
 # Achtung: Hier auf die Reihefolge achten: 
@@ -367,23 +289,15 @@ tirol.5$a.zu.kompliziert[tirol.5$note.audiemus != "k.A." &
 tirol.5$a.unbekannt[tirol.5$note.audiemus != "k.A." &
                             is.na(tirol.5$a.unbekannt)] <- "trifft nicht zu"
 
-```
 
-
-Wie oben gehört jetzt entsprechend mit jeder Variablen verfahren. Gleichzeitig müsste jedoch die Code-Tabelle erstellt werden. Das mache ich später, bzw. könnte ich delegieren.
-
-```{r loesche-ueberfluessige-spalten-und-zeilen}
+## ----loesche-ueberfluessige-spalten-und-zeilen---------------------------
 
 
 tirol.5[c(1, 3:5, 7:9, 11:15, 17:21, 23:27, 29:33, 35:39, 41:42, 44:48,
           51:56, 58:63, 65:69, 72:77, 79:84, 86:90, 93:97)] <- list(NULL)
 
 tirol.5 <- slice(tirol.5, 3:n())
-```
 
-# Datensatz bereinigt speichern
-
-
-```{r speichere-bereinigte-datei-unter-neuen-namen}
+## ----speichere-bereinigte-datei-unter-neuen-namen------------------------
 saveRDS(tirol.5, file = "../daten/tirol.5.rds")
-```
+

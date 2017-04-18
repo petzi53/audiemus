@@ -1,0 +1,60 @@
+---
+title: "Dateien zum Recodieren aufrufen"
+author: "Peter Baumgartner"
+date: "2017-04-17"
+output: 
+        html_notebook:
+                toc: yes
+                toc_depth: 3
+                
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+if (!require("knitr"))
+        {install.packages("knitr", repos = 'http://cran.wu.ac.at/')
+        library(knitr)}
+
+
+```
+
+Diese Datei enthält Anweisungen für einen automatisieren Aufruf aller Programmteile, die zum Daten bereinigen benötigt werden. Zuerst müssen aus den `Rmd`-Daten die R-Scripts extrahiert werden. Dann können diese Programme der Reihe nach aufgerufen und ausgeführt werden.
+```{r automatisierter-aufruf-zur-daten-bereinigung}
+
+purl(get-data.1.Rmd)
+purl(get-data.2.Rmd)
+purl(get-data.3.Rmd)
+purl(get-data.4.Rmd)
+purl(get-data.5.Rmd)
+purl(combine-and-save.Rmd)
+
+source(get-data.1.R)
+source(get-data.2.R)
+source(get-data.3.R)
+source(get-data.4.R)
+source(get-data.5.R)
+source(combine-and-save.R)
+```
+
+
