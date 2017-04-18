@@ -1,16 +1,4 @@
----
-title: "Daten bereinigen (4)"
-author: "Peter Baumgartner"
-date: "2017-03-19"
-output: 
-        html_notebook:
-                toc: yes
-                toc_depth: 3
-                
----
-***
-
-```{r label = "global-options", echo=FALSE, highlight=TRUE}
+## ----label = "global-options", echo=FALSE, highlight=TRUE----------------
 knitr::opts_chunk$set(
         message = F,
         error = F,
@@ -37,17 +25,8 @@ if (!require("forcats"))
         library(forcats)}
 
 
-```
 
-# Datenbereinigen
-
-## Daten einspielen
-
-
-Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei hat 5 Blätter (sheets). Ich lade vorerst nur das erste Blatt in R ein und speichere es in ein für R lesbares Format ab. 
-
-
-```{r load-first-sheet-of-excel-file-into-r-memory}
+## ----load-first-sheet-of-excel-file-into-r-memory------------------------
 
 umfrage.4 <- read_excel(
         "../daten/umfrage-tirol-36tn.xlsx",
@@ -59,38 +38,11 @@ umfrage.4 <- read_excel(
         )
 saveRDS(umfrage.4, file = "../daten/umfrage-tirol.4.rds")
 
-```
 
-## Grundsätzliche Überlegungen zur Datenstruktur
-Leider sind die Daten in einer nicht zu bearbeitenden Form erfasst worden. Richtig wäre gewesen: 
-
-* Es gehört für jede befragte Person (= Beobachtung) eine eine Zeile. 
-* Es gehört für jede Frage (= Variable) eine eigene Spalte, in der dann die entsprechende Ausprägung der Antwort eingetragen wird.
-
-Statt dessen wurden Personen als Spalten geführt und die Fragen als Zeilen. Dazu kommt auch noch, dass die für jede einzelne Ausprägung eine eigene Zeile genommen wurde, was zu einer großen Anzahl leerer Felder führt, die als `NA`s (data "Not Available"") interpretiert werden.
-
-Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumt"" werden. Dieses Konzept heißt [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html).
-
-Für die weiteren Transformationen der Datei lege ich ein neues Datenset an, das ich `tirol` nenne.
-Der erste Schritt ist es, dass Zeilen und Spalten verdreht werden. Dies geschieht mit der Funktion `t` (= transpose). `t` erzeugt eine Matrix; ich bevorzuge aber weiterhin im `tibble`-Format zu bleiben. 
-
-```{r vertausche-reihen-und-spalten}
+## ----vertausche-reihen-und-spalten---------------------------------------
 tirol.4 <- as_tibble(t(umfrage.4))
-```
 
-Als Ergebnis bekomme ich nun ein Datenset, wo für jede Spalte eine Variable vorgesehen wird. Allerdings ist nicht nur der Text der Frage eine Variable, sondern auch jeder ihrer möglichen Antworten. Die Merkmalsausprägungen gehören zusammen mit der Frage zu einer einzigen Variablen zusammengefasst.
-
-Ein Beispiel: Die Fragen "An welchem Schultyp unterrichten Sie?" (V2) hat die Ausprägungen `AHS`, `NMS` und `PTS` (V3, V4, V5) und gehört zu einer Variablen `schultyp` zusammengefasst. Das heißt V2 bis V5 gehört zu einer Variable `schultyp` zusammen gefasst. Die Herausforderung dabei ist, dass die jeweiligen Kreuze in den Variablen mit dem jeweiligen Wert der Ausprägung ersetzt werden muss.
-
-Dazu muss die entsprechende Variable selektiert werden und jedes "x" mit dem entsprechenden Wert der jeweiligen Spalte überschrieben werden. Also beispielsweise müssen alle "x" in Variable V3 mit "AHS", alle "x" in V4 mit "NMS" und alle V5 mit "PTS" ersetzt werden. Außerdem müssen  diese  Ergebnisse in einer einzigen Variable zusammengefasst werden. Danach kann sowohl die Frage (V2) als auch die nicht mehr benötigten anderen Variablen dieser Frage gelöscht werden. Schlussendlich noch kann die entsprechende - nun korrekt ausgefüllte - Variable in `schultyp` umbenannt werden. Gleichzeitig muss ein Code-Buch entwickelt werden, in dem die Fragestellung, der Code der Variable und die Ausprägungen eingetragen werden.
-
-## Ausprägungen in Variable überführen
-
-Untenstehendes Programm-Snippet kann sinnvollerweise nur einmal ausgeführt werden. Ich habe es deshalb als Kommentar `#` inaktiv gesetzt.
-
-
-
-```{r auspraegungen-in-variable-ueberfuehren}
+## ----auspraegungen-in-variable-ueberfuehren------------------------------
 
 # i.fach
 tirol.4$V2[tirol.4$V3 == "x"] <- 1
@@ -167,23 +119,14 @@ names(tirol.4)[names(tirol.4) == 'V32'] <- 'note.interesse'
 names(tirol.4)[names(tirol.4) == 'V33'] <- 'note.sonstiges'
 
 
-```
 
-
-
-Wie oben gehört jetzt entsprechend mit jeder Variablen verfahren. Gleichzeitig müsste jedoch die Code-Tabelle erstellt werden. Das mache ich später, bzw. könnte ich delegieren.
-
-```{r loesche-ueberfluessige-spalten}
+## ----loesche-ueberfluessige-spalten--------------------------------------
 
 
 tirol.4[c(1, 3:6, 8:11, 13:16, 18:21, 23:26, 28:31, 34)] <- list(NULL)
 
 tirol.4 <- slice(tirol.4, 3:n())
-```
 
-# Datensatz bereinigt speichern
-
-
-```{r speichere-bereinigte-datei-unter-neuen-namen}
+## ----speichere-bereinigte-datei-unter-neuen-namen------------------------
 saveRDS(tirol.4, file = "../daten/tirol.4.rds")
-```
+
