@@ -130,9 +130,6 @@ bp <- ggplot(schultyp.lang, aes(x = Schulart, y = Prozent, fill = Schultyp)) +
 bp
 ```
 
-```{r label="technische-ausstattung"}
-bp <- ggplot(umfrage, aes(t.pc.ja, ))
-```
 
 
 
