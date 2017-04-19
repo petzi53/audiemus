@@ -1,0 +1,107 @@
+---
+title: "Proportional gestapelte Balkendiagramme"
+author: "Peter Baumgartner"
+date: '2017-04-16'
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T,
+        fig.path = "images/"
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+if (!require("ggplot2"))
+        {install.packages("ggplot2", repos = 'http://cran.wu.ac.at/')
+        library(ggplot2)}
+if (!require("sjmisc"))
+        {install.packages("sjmisc", repos = 'http://cran.wu.ac.at/')
+        library(sjmisc)}
+if (!require("sjPlot"))
+        {install.packages("sjPlot", repos = 'http://cran.wu.ac.at/')
+        library(sjPlot)}
+
+# lade Daten
+umfrage <- readRDS("../daten/audiemus.rds")
+```
+
+Diese Datei stellt die verschiedenen Fragenbatterien als proportional gestapelte Balkendidagramme dar. Das sind Balken, die die perzentuelle Verteilung der Items einer Frage in ihrer Gräße anzeigen. Es werden dabei alle Fragen einer Batterie untereinander zum besseren Vergleich dargestellt.
+
+Ich habe die Grafiken derzeit noch nicht hübsche gemacht, d.h. keine detaillierte Beschreibung, bei den Farben, Schriftgrößten gespielt. Das ist vorerst nicht notwendig. Wahrscheinlich werde ich die meisten Grafiken für den Artikel sowieso nicht brauchen. Für ansprechende Folien für den Auftritt (das Referat, die Präsentation) ist ja noch Zeit…
+
+## Ausstattung
+
+```{r label="gestapeltes-balkendiagramm", warning=FALSE, , fig.width=8, fig.height=6}
+library(sjPlot)
+ausstattung <- select(umfrage, c(9:4, 2))
+#names(ausstattung) <- c("PCs", "Tablets", "WLAN")
+sjp.stackfrq(ausstattung, digits = 0)
+```
+
+## IKT-Kompetenz
+
+```{r label="ikt-kompetenz", warning=FALSE, , fig.width=8, fig.height=6}
+library(sjPlot)
+ikt.kompetenz <- select(umfrage, c(15:10))
+sjp.stackfrq(ikt.kompetenz, digits = 0)
+```
+
+## Erfahrungen mit audiemus
+
+```{r label="audiemus-erfahrung", warning=FALSE, fig.width=8, fig.height=6}
+library(sjPlot)
+audiemus.erfahrung <- select(umfrage, c(52:45))
+sjp.stackfrq(audiemus.erfahrung, digits = 0)
+```
+
+## Förderliche Faktoren (Wünsche)
+
+```{r label="wunsch", warning=FALSE, fig.width=8, fig.height=10}
+library(sjPlot)
+wunsch <- select(umfrage, c(30:16))
+sjp.stackfrq(wunsch, digits = 0)
+```
+## Interess
+
+```{r label="interesse", warning=FALSE, fig.width=8, fig.height=5}
+library(sjPlot)
+interesse <- select(umfrage, c(36:31))
+sjp.stackfrq(interesse, digits = 0)
+```
+
+## Warum wird nicht Audiumus benutzt?
+
+```{r label="nutzung", warning=FALSE, fig.width=8, fig.height=5}
+library(sjPlot)
+audiemus.nutzung <- select(umfrage, c(44:39))
+sjp.stackfrq(audiemus.nutzung, digits = 1)
+```
+
+# Literatur

@@ -1,0 +1,156 @@
+---
+title: "Teste Grafiken mit Likert-Skalen"
+author: "Peter Baumgartner"
+date: '2017-04-19'
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+### loading some required packages
+if (!require("tidyverse"))
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+if (!require("sjPlot"))
+        {install.packages("sjPlot", repos = 'http://cran.wu.ac.at/')
+        library(sjPlot)}
+
+```
+***
+# Generiere Testdaten für Likert-Saklen
+
+Nachfolgendes Beispiel stammt aus R-Bloggers [Plotting Likert Scales](https://www.r-bloggers.com/plotting-likert-scales/).
+
+
+
+```{r generate-data-for-test-likert-graphics}
+set.seed(1234)
+library(e1071)
+probs <-
+cbind(c(.4, .2 / 3, .2 / 3, .2 / 3, .4),
+c(.1 / 4, .1 / 4, .9, .1 / 4, .1 / 4),
+c(.2, .2, .2, .2, .2))
+my.n <- 100
+my.len <- ncol(probs) * my.n
+raw <- matrix(NA, nrow = my.len, ncol = 2)
+raw <- NULL
+for (i in 1:ncol(probs)) {
+        raw <-
+        rbind(raw, cbind(i, rdiscrete(
+        my.n, probs = probs[, i], values = 1:5
+     )))
+}
+
+r <- data.frame(cbind(
+as.numeric(row.names(tapply(raw[, 2], raw[, 1], mean))),
+        tapply(raw[, 2], raw[, 1], mean),
+        tapply(raw[, 2], raw[, 1], mean) + sqrt(tapply(raw[, 2], raw[, 1], var) /
+        tapply(raw[, 2], raw[, 1], length)) * qnorm(1 - .05 / 2, 0, 1),
+        tapply(raw[, 2], raw[, 1], mean) - sqrt(tapply(raw[, 2], raw[, 1], var) /
+        tapply(raw[, 2], raw[, 1], length)) * qnorm(1 - .05 / 2, 0, 1)
+        ))
+names(r) <- c("group", "mean", "ll", "ul")
+
+gbar <- tapply(raw[, 2], list(raw[, 2], raw[, 1]), length)
+
+sgbar <- data.frame(cbind(c(1:max(unique(raw[, 1]))), t(gbar)))
+
+sgbar.likert <- sgbar[, 2:6]
+
+```
+
+## Proportional gestapelte Balkendiagramme
+
+```{r porportional-stacked-bar-graphs}
+library(ggplot2)
+library(reshape2)
+ 
+names(sgbar) <- c("group","Strongly Agree","Agree","Neutral","Disagree","Strongly Disagree")
+ 
+mx <- melt(sgbar, id.vars = 1)
+names(mx) <- c("Group", "Category", "Percent")
+
+ggplot(mx, aes(x = Group, y = Percent, fill = Category)) +
+        geom_bar(stat = "identity")
+```
+
+## Gestapelte Netto Verteilungen
+
+Das sind proportional gestapelte Balkendiagramme, wo die neutrale (mittlere) Kategorie herausgenommen wurde und die Antworten um das Zentrum herum gruppiert. 
+
+[Net stacked distribution](http://www.organizationview.com/net-stacked-distribution-a-better-way-to-visualize-likert-data) graphs are a nice way of comparing data on a Likert scale (i.e. when respondents are asked whether they "Strongly Disagree", "Disagree", etc. with a statement). It strips out the neutral responses and centers the responses around the center of the graph so you can quickly compare agreement and disagreement on different issues. Here we'll learn how to do this in ggplot2 -- it takes a dosage of deviousness (aus Ethan Brown: [Improved net stacked distribution graphs via ggplot2 trickery](http://statisfactions.com/2012/improved-net-stacked-distribution-graphs-via-ggplot2-trickery/. Blogeintrag in: Satisfactions: The Sounds of Data and Whimsy. )
+
+Das nachfolgende Besipiel stammt aus [Plotting Likert-Scales (net stacked distributions) with ggplot #rstats](https://strengejacke.wordpress.com/2013/07/17/plotting-likert-scales-net-stacked-distributions-with-ggplot-rstats/):
+
+Ich musste dazu allerdings einige Veränderungen vornehmen, weil das Programm-Paket seit der Publikation (17. Juli 2013) neue Versionen erlebt hat. So stimmen die Parameter-Namen für die sjp.likert-Funktion nicht mehr. Und die Bezeichnung sind nicht Listen sondern Vektoren.
+
+```{r gestapelte-netto-verteilungen-unsortiert}
+library(sjPlot)
+
+likert_4 <- data.frame(as.factor(sample(1:4, 500, replace=T, prob=c(0.2,0.3,0.1,0.4))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.5,0.25,0.15,0.1))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.25,0.1,0.4,0.25))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.1,0.4,0.4,0.1))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.35,0.25,0.15,0.25))))
+levels_4 <- c("Strongly disagree", "Disagree", "Agree", "Strongly Agree")
+items <- c("Q1", "Q2", "Q3", "Q4", "Q5")
+
+sjp.likert(likert_4, 
+           legend.labels = levels_4, 
+           axis.labels = items
+           )
+```
+
+```{r gestapelte-netto-verteilungen-sortiert}
+library(sjPlot)
+
+likert_4 <- data.frame(as.factor(sample(1:4, 500, replace=T, prob=c(0.2,0.3,0.1,0.4))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.5,0.25,0.15,0.1))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.25,0.1,0.4,0.25))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.1,0.4,0.4,0.1))),
+                       as.factor(sample(1:4, 500, replace=T, prob=c(0.35,0.25,0.15,0.25))))
+levels_4 <- c("Strongly disagree", "Disagree", "Agree", "Strongly Agree")
+items <- c("Q1", "Q2", "Q3", "Q4", "Q5")
+
+sjp.likert(likert_4, 
+           legend.labels = levels_4, 
+           axis.labels = items,
+           sort.frq = "neg.desc"
+           )
+```
+
+```{r proportional-gestapelte-balkendiagramme}
+
+levels_42 <- c("Independent", "Slightly dependent", "Dependent", "Severely dependent")
+levels_62 <- c("Independent", "Slightly dependent", "Dependent", "Very dependent", "Severely dependent", "Very severely dependent")
+sjp.stackfrq(likert_4, 
+             legend.labels = levels_42, 
+             axis.labels = items)
+
+```
+
