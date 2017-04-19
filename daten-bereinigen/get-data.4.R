@@ -20,9 +20,12 @@ if (!require("readxl"))
 if (!require("pander"))
         {install.packages("pander", repos = 'http://cran.wu.ac.at/')
         library(pander)}
+<<<<<<< HEAD
 if (!require("forcats"))
         {install.packages("forcats", repos = 'http://cran.wu.ac.at/')
         library(forcats)}
+=======
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 
 
@@ -45,6 +48,7 @@ tirol.4 <- as_tibble(t(umfrage.4))
 ## ----auspraegungen-in-variable-ueberfuehren------------------------------
 
 # i.fach
+<<<<<<< HEAD
 tirol.4$V2[tirol.4$V3 == "x"] <- 1
 tirol.4$V2[tirol.4$V4 == "x"] <- 2
 tirol.4$V2[tirol.4$V5 == "x"] <- 3
@@ -112,6 +116,51 @@ tirol.4$i.fortbildung <- factor(as.factor(tirol.4$i.fortbildung),
         levels = c(1, 2, 3), 
         labels = c("sehr interessiert", "interessiert", "nicht interessiert"),
         ordered = TRUE)
+=======
+tirol.4$V2[tirol.4$V3 == "x"] <- "A"
+tirol.4$V2[tirol.4$V4 == "x"] <- "B"
+tirol.4$V2[tirol.4$V5 == "x"] <- "C"
+tirol.4$V2[tirol.4$V6 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V2'] <- 'i.fach'
+
+
+# i.allgemein
+tirol.4$V7[tirol.4$V8 == "x"] <- "A"
+tirol.4$V7[tirol.4$V9 == "x"] <- "B"
+tirol.4$V7[tirol.4$V10 == "x"] <- "C"
+tirol.4$V7[tirol.4$V11 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V7'] <- 'i.allgemein'
+
+
+# i.schueler
+tirol.4$V12[tirol.4$V13 == "x"] <- "A"
+tirol.4$V12[tirol.4$V14 == "x"] <- "B"
+tirol.4$V12[tirol.4$V15 == "x"] <- "C"
+tirol.4$V12[tirol.4$V16 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V12'] <- 'i.schueler'
+
+# i.planung
+tirol.4$V17[tirol.4$V18 == "x"] <- "A"
+tirol.4$V17[tirol.4$V19 == "x"] <- "B"
+tirol.4$V17[tirol.4$V20 == "x"] <- "C"
+tirol.4$V17[tirol.4$V21 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V17'] <- 'i.planung'
+
+
+# i.handy
+tirol.4$V22[tirol.4$V23 == "x"] <- "A"
+tirol.4$V22[tirol.4$V24 == "x"] <- "B"
+tirol.4$V22[tirol.4$V25 == "x"] <- "C"
+tirol.4$V22[tirol.4$V26 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V22'] <- 'i.handy'
+
+# i.fortbildung
+tirol.4$V27[tirol.4$V28 == "x"] <- "A"
+tirol.4$V27[tirol.4$V29 == "x"] <- "B"
+tirol.4$V27[tirol.4$V30 == "x"] <- "C"
+tirol.4$V27[tirol.4$V31 == "x"] <- NA
+names(tirol.4)[names(tirol.4) == 'V27'] <- 'i.fortbildung'
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 
 # sonstiges

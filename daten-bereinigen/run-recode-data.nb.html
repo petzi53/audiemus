@@ -179,12 +179,39 @@ $(document).ready(function () {
 <hr />
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
+=======
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiB0aWR5dmVyc2VcbkxvYWRpbmcgdGlkeXZlcnNlOiBnZ3Bsb3QyXG5Mb2FkaW5nIHRpZHl2ZXJzZTogdGliYmxlXG5Mb2FkaW5nIHRpZHl2ZXJzZTogdGlkeXJcbkxvYWRpbmcgdGlkeXZlcnNlOiByZWFkclxuTG9hZGluZyB0aWR5dmVyc2U6IHB1cnJyXG5Mb2FkaW5nIHRpZHl2ZXJzZTogZHBseXJcbkNvbmZsaWN0cyB3aXRoIHRpZHkgcGFja2FnZXMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG5maWx0ZXIoKTogZHBseXIsIHN0YXRzXG5sYWcoKTogICAgZHBseXIsIHN0YXRzXG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHJlc2hhcGUyXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhyZXNoYXBlMuKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnRpZHly4oCZOlxuXG4gICAgc21pdGhzXG5cbkxvYWRpbmcgcmVxdWlyZWQgcGFja2FnZTogcmVhZHhsXG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHBhbmRlclxuTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBrbml0clxuIn0= -->
+<pre><code>Loading required package: tidyverse
+Loading tidyverse: ggplot2
+Loading tidyverse: tibble
+Loading tidyverse: tidyr
+Loading tidyverse: readr
+Loading tidyverse: purrr
+Loading tidyverse: dplyr
+Conflicts with tidy packages ------------------------------------------------------------------------
+filter(): dplyr, stats
+lag():    dplyr, stats
+Loading required package: reshape2
+
+Attaching package: ‘reshape2’
+
+The following object is masked from ‘package:tidyr’:
+
+    smiths
+
+Loading required package: readxl
+Loading required package: pander
+Loading required package: knitr</code></pre>
+<!-- rnb-output-end -->
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Diese Datei enthält Anweisungen für einen automatisieren Aufruf aller Programmteile, die zum Daten bereinigen benötigt werden. Zuerst müssen aus den <code>Rmd</code>-Daten die R-Scripts extrahiert werden. Dann können diese Programme der Reihe nach aufgerufen und ausgeführt werden.</p>
 <p><strong>Vorsicht:</strong> Es ist nicht garantiert, dass die extrahierten R-Scripts tatsächlich genau zu denselben Ergebnisse, wie das mit den knitr-Dokument der Fall ist. Unklar ist für mich auch noch, was der Unterschied von <code>knit</code> und <code>purl</code>-Befehl ist. Es ist daher gut, wenn ich für die weitere Verarbeitung (= Artikel schreiben) trotzdem alle Programm-Dateien im Rmd-Modus ausführe.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<<<<<<< HEAD
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5wdXJsKFwiZ2V0LWRhdGEuMS5SbWRcIilcbnB1cmwoXCJnZXQtZGF0YS4yLlJtZFwiKVxucHVybChcImdldC1kYXRhLjMuUm1kXCIpXG5wdXJsKFwiZ2V0LWRhdGEuNC5SbWRcIilcbnB1cmwoXCJnZXQtZGF0YS41LlJtZFwiKVxucHVybChcImNvbWJpbmUtYW5kLXNhdmUuUm1kXCIpXG5cbnNvdXJjZShcImdldC1kYXRhLjEuUlwiKVxuc291cmNlKFwiZ2V0LWRhdGEuMi5SXCIpXG5zb3VyY2UoXCJnZXQtZGF0YS4zLlJcIilcbnNvdXJjZShcImdldC1kYXRhLjQuUlwiKVxuc291cmNlKFwiZ2V0LWRhdGEuNS5SXCIpXG5zb3VyY2UoXCJjb21iaW5lLWFuZC1zYXZlLlJcIilcbmBgYCJ9 -->
 <pre class="r"><code>
 purl(&quot;get-data.1.Rmd&quot;)
@@ -196,16 +223,299 @@ purl(&quot;combine-and-save.Rmd&quot;)
 
 source(&quot;get-data.1.R&quot;)
 source(&quot;get-data.2.R&quot;)
+=======
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2Qub2xkIDwtIGdldHdkKClcbnNldHdkKFwifi9Eb2N1bWVudHMvTWVpbmUgUmVwb3MvQXVkaWVtdXMvZGF0ZW4tYmVyZWluaWdlblwiKVxucHVybChcImdldC1kYXRhLjEuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>wd.old &lt;- getwd()
+setwd(&quot;~/Documents/Meine Repos/Audiemus/daten-bereinigen&quot;)
+purl(&quot;get-data.1.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogZ2V0LWRhdGEuMS5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: get-data.1.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyNSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDMzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNDIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICA1MCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDU4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgfCAgNjclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICB8ICA3NSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgIHwgIDgzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgfCAgOTIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi58IDEwMCVcbiJ9 -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.....                                                            |   8%
+  |                                                                       
+  |...........                                                      |  17%
+  |                                                                       
+  |................                                                 |  25%
+  |                                                                       
+  |......................                                           |  33%
+  |                                                                       
+  |...........................                                      |  42%
+  |                                                                       
+  |................................                                 |  50%
+  |                                                                       
+  |......................................                           |  58%
+  |                                                                       
+  |...........................................                      |  67%
+  |                                                                       
+  |.................................................                |  75%
+  |                                                                       
+  |......................................................           |  83%
+  |                                                                       
+  |............................................................     |  92%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGdldC1kYXRhLjEuUlxuIn0= -->
+<pre><code>output file: get-data.1.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZ2V0LWRhdGEuMS5SXCJcbiJ9 -->
+<pre><code>[1] &quot;get-data.1.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHVybChcImdldC1kYXRhLjIuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>purl(&quot;get-data.2.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogZ2V0LWRhdGEuMi5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: get-data.2.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyNSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDMzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNDIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICA1MCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDU4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgfCAgNjclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICB8ICA3NSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgIHwgIDgzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgfCAgOTIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi58IDEwMCVcbiJ9 -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.....                                                            |   8%
+  |                                                                       
+  |...........                                                      |  17%
+  |                                                                       
+  |................                                                 |  25%
+  |                                                                       
+  |......................                                           |  33%
+  |                                                                       
+  |...........................                                      |  42%
+  |                                                                       
+  |................................                                 |  50%
+  |                                                                       
+  |......................................                           |  58%
+  |                                                                       
+  |...........................................                      |  67%
+  |                                                                       
+  |.................................................                |  75%
+  |                                                                       
+  |......................................................           |  83%
+  |                                                                       
+  |............................................................     |  92%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGdldC1kYXRhLjIuUlxuIn0= -->
+<pre><code>output file: get-data.2.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZ2V0LWRhdGEuMi5SXCJcbiJ9 -->
+<pre><code>[1] &quot;get-data.2.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHVybChcImdldC1kYXRhLjMuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>purl(&quot;get-data.3.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogZ2V0LWRhdGEuMy5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: get-data.3.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA3JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTQlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyMSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDI5JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMzYlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICA0MyVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDUwJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNTclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICB8ICA2NCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgIHwgIDcxJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgfCAgNzklXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICB8ICA4NiVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgIHwgIDkzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4ufCAxMDAlXG4ifQ== -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.....                                                            |   7%
+  |                                                                       
+  |.........                                                        |  14%
+  |                                                                       
+  |..............                                                   |  21%
+  |                                                                       
+  |...................                                              |  29%
+  |                                                                       
+  |.......................                                          |  36%
+  |                                                                       
+  |............................                                     |  43%
+  |                                                                       
+  |................................                                 |  50%
+  |                                                                       
+  |.....................................                            |  57%
+  |                                                                       
+  |..........................................                       |  64%
+  |                                                                       
+  |..............................................                   |  71%
+  |                                                                       
+  |...................................................              |  79%
+  |                                                                       
+  |........................................................         |  86%
+  |                                                                       
+  |............................................................     |  93%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGdldC1kYXRhLjMuUlxuIn0= -->
+<pre><code>output file: get-data.3.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZ2V0LWRhdGEuMy5SXCJcbiJ9 -->
+<pre><code>[1] &quot;get-data.3.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHVybChcImdldC1kYXRhLjQuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>purl(&quot;get-data.4.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogZ2V0LWRhdGEuNC5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: get-data.4.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyNSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDMzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNDIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICA1MCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDU4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgfCAgNjclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICB8ICA3NSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgIHwgIDgzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgfCAgOTIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi58IDEwMCVcbiJ9 -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.....                                                            |   8%
+  |                                                                       
+  |...........                                                      |  17%
+  |                                                                       
+  |................                                                 |  25%
+  |                                                                       
+  |......................                                           |  33%
+  |                                                                       
+  |...........................                                      |  42%
+  |                                                                       
+  |................................                                 |  50%
+  |                                                                       
+  |......................................                           |  58%
+  |                                                                       
+  |...........................................                      |  67%
+  |                                                                       
+  |.................................................                |  75%
+  |                                                                       
+  |......................................................           |  83%
+  |                                                                       
+  |............................................................     |  92%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGdldC1kYXRhLjQuUlxuIn0= -->
+<pre><code>output file: get-data.4.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZ2V0LWRhdGEuNC5SXCJcbiJ9 -->
+<pre><code>[1] &quot;get-data.4.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHVybChcImdldC1kYXRhLjUuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>purl(&quot;get-data.5.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogZ2V0LWRhdGEuNS5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: get-data.5.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyNSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDMzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNDIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICA1MCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDU4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgICAgICAgICAgfCAgNjclXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICB8ICA3NSVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgIHwgIDgzJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgfCAgOTIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi58IDEwMCVcbiJ9 -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.....                                                            |   8%
+  |                                                                       
+  |...........                                                      |  17%
+  |                                                                       
+  |................                                                 |  25%
+  |                                                                       
+  |......................                                           |  33%
+  |                                                                       
+  |...........................                                      |  42%
+  |                                                                       
+  |................................                                 |  50%
+  |                                                                       
+  |......................................                           |  58%
+  |                                                                       
+  |...........................................                      |  67%
+  |                                                                       
+  |.................................................                |  75%
+  |                                                                       
+  |......................................................           |  83%
+  |                                                                       
+  |............................................................     |  92%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGdldC1kYXRhLjUuUlxuIn0= -->
+<pre><code>output file: get-data.5.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiZ2V0LWRhdGEuNS5SXCJcbiJ9 -->
+<pre><code>[1] &quot;get-data.5.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHVybChcImNvbWJpbmUtYW5kLXNhdmUuUm1kXCIpXG5gYGAifQ== -->
+<pre class="r"><code>purl(&quot;combine-and-save.Rmd&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cbnByb2Nlc3NpbmcgZmlsZTogY29tYmluZS1hbmQtc2F2ZS5SbWRcbiJ9 -->
+<pre><code>
+
+processing file: combine-and-save.Rmd</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMCVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDExJVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjIlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAzMyVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDQ0JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgNTYlXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLiAgICAgICAgICAgICAgICAgICAgICB8ICA2NyVcbiAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gIHwuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgICAgICAgIHwgIDc4JVxuICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgfC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gICAgICAgfCAgODklXG4gIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICB8Li4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi58IDEwMCVcbiJ9 -->
+<pre><code>
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |.......                                                          |  11%
+  |                                                                       
+  |..............                                                   |  22%
+  |                                                                       
+  |......................                                           |  33%
+  |                                                                       
+  |.............................                                    |  44%
+  |                                                                       
+  |....................................                             |  56%
+  |                                                                       
+  |...........................................                      |  67%
+  |                                                                       
+  |...................................................              |  78%
+  |                                                                       
+  |..........................................................       |  89%
+  |                                                                       
+  |.................................................................| 100%</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoib3V0cHV0IGZpbGU6IGNvbWJpbmUtYW5kLXNhdmUuUlxuIn0= -->
+<pre><code>output file: combine-and-save.R</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiY29tYmluZS1hbmQtc2F2ZS5SXCJcbiJ9 -->
+<pre><code>[1] &quot;combine-and-save.R&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiZ2V0LWRhdGEuMS5SXCIpXG5gYGAifQ== -->
+<pre class="r"><code>source(&quot;get-data.1.R&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBmb3JjYXRzXG4ifQ== -->
+<pre><code>Loading required package: forcats</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc291cmNlKFwiZ2V0LWRhdGEuMi5SXCIpXG5zb3VyY2UoXCJnZXQtZGF0YS4zLlJcIilcbnNvdXJjZShcImdldC1kYXRhLjQuUlwiKVxuc291cmNlKFwiZ2V0LWRhdGEuNS5SXCIpXG5zb3VyY2UoXCJjb21iaW5lLWFuZC1zYXZlLlJcIilcbmBgYCJ9 -->
+<pre class="r"><code>source(&quot;get-data.2.R&quot;)
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 source(&quot;get-data.3.R&quot;)
 source(&quot;get-data.4.R&quot;)
 source(&quot;get-data.5.R&quot;)
 source(&quot;combine-and-save.R&quot;)</code></pre>
 <!-- rnb-source-end -->
+<<<<<<< HEAD
+=======
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiB4bHN4XG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHJKYXZhXG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHhsc3hqYXJzXG4ifQ== -->
+<pre><code>Loading required package: xlsx
+Loading required package: rJava
+Loading required package: xlsxjars</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0d2Qod2Qub2xkKVxuYGBgIn0= -->
+<pre class="r"><code>setwd(wd.old)</code></pre>
+<!-- rnb-source-end -->
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
+<<<<<<< HEAD
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0ZWllbiB6dW0gUmVjb2RpZXJlbiBhdWZydWZlbiIKYXV0aG9yOiAiUGV0ZXIgQmF1bWdhcnRuZXIiCmRhdGU6ICIyMDE3LTA0LTE3IgpvdXRwdXQ6IAogICAgICAgIGh0bWxfbm90ZWJvb2s6CiAgICAgICAgICAgICAgICB0b2M6IHllcwogICAgICAgICAgICAgICAgdG9jX2RlcHRoOiAzCiAgICAgICAgICAgICAgICAKLS0tCioqKgoKYGBge3IgbGFiZWwgPSAiZ2xvYmFsLW9wdGlvbnMiLCBlY2hvPUZBTFNFLCBoaWdobGlnaHQ9VFJVRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgICAgIG1lc3NhZ2UgPSBGLAogICAgICAgIGVycm9yID0gRiwKICAgICAgICB3YXJuaW5nID0gRiwKICAgICAgICBjb21tZW50ID0gTkEsCiAgICAgICAgaGlnaGxpZ2h0ID0gVCwKICAgICAgICBwcm9tcHQgPSBUCiAgICAgICAgKQoKaWYgKCFyZXF1aXJlKCJ0aWR5dmVyc2UiKSkgCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIsIHJlcG9zID0gJ2h0dHA6Ly9jcmFuLnd1LmFjLmF0LycpCiAgICAgICAgbGlicmFyeSh0aWR5dmVyc2UpfQppZiAoIXJlcXVpcmUoInJlc2hhcGUyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInJlc2hhcGUyIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KHJlc2hhcGUyKX0KaWYgKCFyZXF1aXJlKCJyZWFkeGwiKSkKICAgICAgICB7aW5zdGFsbC5wYWNrYWdlcygicmVhZHhsIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KHJlYWR4bCl9CmlmICghcmVxdWlyZSgicGFuZGVyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInBhbmRlciIsIHJlcG9zID0gJ2h0dHA6Ly9jcmFuLnd1LmFjLmF0LycpCiAgICAgICAgbGlicmFyeShwYW5kZXIpfQppZiAoIXJlcXVpcmUoImtuaXRyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoImtuaXRyIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KGtuaXRyKX0KCgpgYGAKCkRpZXNlIERhdGVpIGVudGjDpGx0IEFud2Vpc3VuZ2VuIGbDvHIgZWluZW4gYXV0b21hdGlzaWVyZW4gQXVmcnVmIGFsbGVyIFByb2dyYW1tdGVpbGUsIGRpZSB6dW0gRGF0ZW4gYmVyZWluaWdlbiBiZW7DtnRpZ3Qgd2VyZGVuLiBadWVyc3QgbcO8c3NlbiBhdXMgZGVuIGBSbWRgLURhdGVuIGRpZSBSLVNjcmlwdHMgZXh0cmFoaWVydCB3ZXJkZW4uIERhbm4ga8O2bm5lbiBkaWVzZSBQcm9ncmFtbWUgZGVyIFJlaWhlIG5hY2ggYXVmZ2VydWZlbiB1bmQgYXVzZ2Vmw7xocnQgd2VyZGVuLgoKKipWb3JzaWNodDoqKiBFcyBpc3QgbmljaHQgZ2FyYW50aWVydCwgZGFzcyBkaWUgZXh0cmFoaWVydGVuIFItU2NyaXB0cyB0YXRzw6RjaGxpY2ggZ2VuYXUgenUgZGVuc2VsYmVuIEVyZ2Vibmlzc2UsIHdpZSBkYXMgbWl0IGRlbiBrbml0ci1Eb2t1bWVudCBkZXIgRmFsbCBpc3QuIFVua2xhciBpc3QgZsO8ciBtaWNoIGF1Y2ggbm9jaCwgd2FzIGRlciBVbnRlcnNjaGllZCB2b24gYGtuaXRgIHVuZCBgcHVybGAtQmVmZWhsIGlzdC4gRXMgaXN0IGRhaGVyIGd1dCwgd2VubiBpY2ggZsO8ciBkaWUgd2VpdGVyZSBWZXJhcmJlaXR1bmcgKD0gQXJ0aWtlbCBzY2hyZWliZW4pIHRyb3R6ZGVtIGFsbGUgUHJvZ3JhbW0tRGF0ZWllbiBpbSBSbWQtTW9kdXMgYXVzZsO8aHJlLgoKCmBgYHtyIGF1dG9tYXRpc2llcnRlci1hdWZydWYtenVyLWRhdGVuLWJlcmVpbmlndW5nfQoKcHVybCgiZ2V0LWRhdGEuMS5SbWQiKQpwdXJsKCJnZXQtZGF0YS4yLlJtZCIpCnB1cmwoImdldC1kYXRhLjMuUm1kIikKcHVybCgiZ2V0LWRhdGEuNC5SbWQiKQpwdXJsKCJnZXQtZGF0YS41LlJtZCIpCnB1cmwoImNvbWJpbmUtYW5kLXNhdmUuUm1kIikKCnNvdXJjZSgiZ2V0LWRhdGEuMS5SIikKc291cmNlKCJnZXQtZGF0YS4yLlIiKQpzb3VyY2UoImdldC1kYXRhLjMuUiIpCnNvdXJjZSgiZ2V0LWRhdGEuNC5SIikKc291cmNlKCJnZXQtZGF0YS41LlIiKQpzb3VyY2UoImNvbWJpbmUtYW5kLXNhdmUuUiIpCmBgYAoKCg==</div>
+=======
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0ZWllbiB6dW0gUmVjb2RpZXJlbiBhdWZydWZlbiIKYXV0aG9yOiAiUGV0ZXIgQmF1bWdhcnRuZXIiCmRhdGU6ICIyMDE3LTA0LTE3IgpvdXRwdXQ6IAogICAgICAgIGh0bWxfbm90ZWJvb2s6CiAgICAgICAgICAgICAgICB0b2M6IHllcwogICAgICAgICAgICAgICAgdG9jX2RlcHRoOiAzCiAgICAgICAgICAgICAgICAKLS0tCioqKgoKYGBge3IgbGFiZWwgPSAiZ2xvYmFsLW9wdGlvbnMiLCBlY2hvPUZBTFNFLCBoaWdobGlnaHQ9VFJVRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgICAgIG1lc3NhZ2UgPSBGLAogICAgICAgIGVycm9yID0gRiwKICAgICAgICB3YXJuaW5nID0gRiwKICAgICAgICBjb21tZW50ID0gTkEsCiAgICAgICAgaGlnaGxpZ2h0ID0gVCwKICAgICAgICBwcm9tcHQgPSBUCiAgICAgICAgKQoKaWYgKCFyZXF1aXJlKCJ0aWR5dmVyc2UiKSkgCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIsIHJlcG9zID0gJ2h0dHA6Ly9jcmFuLnd1LmFjLmF0LycpCiAgICAgICAgbGlicmFyeSh0aWR5dmVyc2UpfQppZiAoIXJlcXVpcmUoInJlc2hhcGUyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInJlc2hhcGUyIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KHJlc2hhcGUyKX0KaWYgKCFyZXF1aXJlKCJyZWFkeGwiKSkKICAgICAgICB7aW5zdGFsbC5wYWNrYWdlcygicmVhZHhsIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KHJlYWR4bCl9CmlmICghcmVxdWlyZSgicGFuZGVyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoInBhbmRlciIsIHJlcG9zID0gJ2h0dHA6Ly9jcmFuLnd1LmFjLmF0LycpCiAgICAgICAgbGlicmFyeShwYW5kZXIpfQppZiAoIXJlcXVpcmUoImtuaXRyIikpCiAgICAgICAge2luc3RhbGwucGFja2FnZXMoImtuaXRyIiwgcmVwb3MgPSAnaHR0cDovL2NyYW4ud3UuYWMuYXQvJykKICAgICAgICBsaWJyYXJ5KGtuaXRyKX0KCgpgYGAKCkRpZXNlIERhdGVpIGVudGjDpGx0IEFud2Vpc3VuZ2VuIGbDvHIgZWluZW4gYXV0b21hdGlzaWVyZW4gQXVmcnVmIGFsbGVyIFByb2dyYW1tdGVpbGUsIGRpZSB6dW0gRGF0ZW4gYmVyZWluaWdlbiBiZW7DtnRpZ3Qgd2VyZGVuLiBadWVyc3QgbcO8c3NlbiBhdXMgZGVuIGBSbWRgLURhdGVuIGRpZSBSLVNjcmlwdHMgZXh0cmFoaWVydCB3ZXJkZW4uIERhbm4ga8O2bm5lbiBkaWVzZSBQcm9ncmFtbWUgZGVyIFJlaWhlIG5hY2ggYXVmZ2VydWZlbiB1bmQgYXVzZ2Vmw7xocnQgd2VyZGVuLgoKKipWb3JzaWNodDoqKiBFcyBpc3QgbmljaHQgZ2FyYW50aWVydCwgZGFzcyBkaWUgZXh0cmFoaWVydGVuIFItU2NyaXB0cyB0YXRzw6RjaGxpY2ggZ2VuYXUgenUgZGVuc2VsYmVuIEVyZ2Vibmlzc2UsIHdpZSBkYXMgbWl0IGRlbiBrbml0ci1Eb2t1bWVudCBkZXIgRmFsbCBpc3QuIFVua2xhciBpc3QgZsO8ciBtaWNoIGF1Y2ggbm9jaCwgd2FzIGRlciBVbnRlcnNjaGllZCB2b24gYGtuaXRgIHVuZCBgcHVybGAtQmVmZWhsIGlzdC4gRXMgaXN0IGRhaGVyIGd1dCwgd2VubiBpY2ggZsO8ciBkaWUgd2VpdGVyZSBWZXJhcmJlaXR1bmcgKD0gQXJ0aWtlbCBzY2hyZWliZW4pIHRyb3R6ZGVtIGFsbGUgUHJvZ3JhbW0tRGF0ZWllbiBpbSBSbWQtTW9kdXMgYXVzZsO8aHJlLgoKYGBge3IgYXV0b21hdGlzaWVydGVyLWF1ZnJ1Zi16dXItZGF0ZW4tYmVyZWluaWd1bmd9CndkLm9sZCA8LSBnZXR3ZCgpCnNldHdkKCJ+L0RvY3VtZW50cy9NZWluZSBSZXBvcy9BdWRpZW11cy9kYXRlbi1iZXJlaW5pZ2VuIikKCnB1cmwoImdldC1kYXRhLjEuUm1kIikKcHVybCgiZ2V0LWRhdGEuMi5SbWQiKQpwdXJsKCJnZXQtZGF0YS4zLlJtZCIpCnB1cmwoImdldC1kYXRhLjQuUm1kIikKcHVybCgiZ2V0LWRhdGEuNS5SbWQiKQpwdXJsKCJjb21iaW5lLWFuZC1zYXZlLlJtZCIpCgpzb3VyY2UoImdldC1kYXRhLjEuUiIpCnNvdXJjZSgiZ2V0LWRhdGEuMi5SIikKc291cmNlKCJnZXQtZGF0YS4zLlIiKQpzb3VyY2UoImdldC1kYXRhLjQuUiIpCnNvdXJjZSgiZ2V0LWRhdGEuNS5SIikKc291cmNlKCJjb21iaW5lLWFuZC1zYXZlLlIiKQoKc2V0d2Qod2Qub2xkKQpgYGAKCgo=</div>
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 
 
