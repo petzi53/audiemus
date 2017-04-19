@@ -1,0 +1,118 @@
+---
+title: "Ist Stichprobe repräsentativ?"
+author: "Peter Baumgartner"
+date: '2017-04-16'
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T,
+        fig.path = "images/"
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+if (!require("ggplot2"))
+        {install.packages("ggplot2", repos = 'http://cran.wu.ac.at/')
+        library(ggplot2)}
+if (!require("sjmisc"))
+        {install.packages("sjmisc", repos = 'http://cran.wu.ac.at/')
+        library(sjmisc)}
+if (!require("sjPlot"))
+        {install.packages("sjPlot", repos = 'http://cran.wu.ac.at/')
+        library(sjPlot)}
+
+# lade Daten
+umfrage <- readRDS("../daten/audiemus.rds")
+```
+
+Diese Datei untersucht ob die Stichprobe im Verhältnis der Schultypen zur Grundgesamtheit repräsentativ ist. 
+
+Der Fragebogen wurde über einen Schulverteiler von Direktor/innen an die 334 Deutsch-Lehrer/innen von Tirol weitergeleitet (AHS: 41/12%, NMS: 252:76%, PTS: 40/12%). Da die Hauptproponentin der Audiemus-Plattform in einer PTS arbeitet, war der Rücklauf für diesen Schultyps überproportional hoch (AHS: 5/14%, NMS: 18/50%, PTS: 13/36%), wohingegen NMS unterrpräsentiert ist. Die Stichprobe ist daher bezogen auf die Schultype nicht als repräsentativ zu bezeichnen (X^2^ = 20,7, df = 2, p > .001).
+
+```{r label="representativity-barplot"}
+## siehe Kapitel 6.3 von REdaS (S.243ff.) 
+x.abs <- table(umfrage$schultyp)
+x.rel <- round(prop.table(table(umfrage$schultyp)), digits = 2)
+x.proz <- round(100 * x.rel, digits = 0)
+X.abs <- c(41, 253, 40)
+X.rel <- prop.table(X.abs / sum(X.abs))
+X.proz <- round(100 * X.rel, digits = 0)
+schulart <- cbind(x.abs, x.proz, X.abs, X.proz)
+schulart
+
+barplot(schulart[, c("X.proz", "x.proz")], beside = TRUE, legend = rownames(schulart), ylim = c(0, 80))
+```
+
+```{r label="chi-quadrat-test"}
+chisq.test(schulart[, 1], p = prop.table(schulart[, 3]))
+```
+
+```{r label="representativity-ggplot"}
+# für ggplot müssen die Daten anders transformiert werden
+# wandle Zeilenname in Variable (Spalte) um
+schulart_tbl <- rownames_to_column(as_tibble((schulart)))
+# benenne die Spalten aussagekräftig
+names(schulart_tbl)[names(schulart_tbl) == "rowname"] <- c("Schultyp")
+names(schulart_tbl)[names(schulart_tbl) == "X.proz"] <- c("Grundgesamtheit")
+names(schulart_tbl)[names(schulart_tbl) == "x.proz"] <- c("Stichprobe")
+# wandle schulart in Faktor mit Levels um
+schulart_tbl$Schultyp <- as.factor(schulart_tbl$Schultyp)
+levels(schulart_tbl$Schultyp) <- c("AHS", "NMS", "PTS")
+# das df ist im "wide"-Format
+schultyp.weit <- select(schulart_tbl, Schultyp, Grundgesamtheit, Stichprobe)
+schultyp.weit
+# ggplot braucht es aber im "long"-Format
+# Umwandlung durch "melt"-Kommando
+schultyp.lang <- melt(schultyp.weit, id.vars = "Schultyp", variable.name = "Schulart", value.name = "Prozent")
+schultyp.lang
+
+
+bp <- ggplot(schultyp.lang, aes(x = Schulart, y = Prozent, fill = Schultyp)) +
+        geom_bar(position = "dodge", stat = "identity") +
+        theme_bw() + 
+        ggtitle("Schultypen in Grundgesamtheit (N = 334) und in\nder (nicht-repräsentativen) Stichprobe (n = 36)") + 
+        ggtitle("Schultypen in Grundgesamtheit (N = 334) und in\nder (nicht-repräsentativen) Stichprobe (n = 36)") + 
+        scale_fill_grey(labels = c("AHS: Allgemein bildende höhere Schule", 
+                                   "NMS: Neue Mittelschule", 
+                                   "PTS: Polytechnische Schule")) +
+        theme(legend.position = c(.85, .95), legend.justification = c(1, 1)) +
+        # scale_fill_manual(values = alpha(c("blue", "red", "green"), .7)) +
+        # scale_fill_manual(values = c("white", "grey", "black")) +
+        geom_text(aes(label = Prozent), vjust = 1.5, color = "white",
+                  position = position_dodge(0.9), size = 4) +
+        annotate("text", x = 0.70, y = -2, label = "AHS", size = 3) +
+        annotate("text", x = 1, y = -2, label = "NMS", size = 3) +
+        annotate("text", x = 1.3, y = -2, label = "PTS", size = 3) +
+        annotate("text", x = 1.70, y = -2, label = "AHS", size = 3) +
+        annotate("text", x = 2, y = -2, label = "NMS", size = 3) +
+        annotate("text", x = 2.3, y = -2, label = "PTS", size = 3)
+        
+bp
+```
