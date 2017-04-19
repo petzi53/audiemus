@@ -86,12 +86,14 @@ saveRDS(tirol.notes, file = "../daten/kommentare.rds" )
 
 # Variablen faktorisieren
 
+## Methode alt: Variable faktorisieren
+
 Dieser Teil hat sich inzwischen erledigt. Hier hatte ich etwas umständlich viele Versionen ausprobiert: 
 
 * Ursprünglich hatte ich als Ausprägung nur 1-5 (als Zeichenkette, nicht als Zahl!) oben übergeben. Das ist aber nicht selbsterklärend und erfordert eine Codierungstabelle. 
 * Danach habe ich gleich die Ausprägungen selbst übergeben. Das hat aber den Nachteil, dass dann die Tabelle (das Datenset) sehr unübersichtlicht wird. 
 * Die Ausprägungen werden in der alphabetischen Reihenfolge der Faktoren in der Grafik dargestellt. Das ist nicht nur unschön, sondern verwirrend. So beginnt die Grafik dann mit "ausbaufähig" und "sehr gut" kommt ganz hinten.
-* Die Ausprägungen sind aber jetzt immer noch Zeichenketten-Variablen, Tyus "char" gespeichert wie z.B. "sehr gut", "ausreichend" etc. Sie müsssen in Faktor-Variablen mit unterschiedlichen Ausprägungen ("levels") umgewandelt werden. Der Befehl dazu lautet:
+* Die Ausprägungen sind aber jetzt immer noch Zeichenketten-Variablen, Typus "char" gespeichert wie z.B. "sehr gut", "ausreichend" etc. Sie müsssen in Faktor-Variablen mit unterschiedlichen Ausprägungen ("levels") umgewandelt werden. Der Befehl dazu lautet:
 
 In der Zwischenzeit habe ich dies jeweils direkt bei den jeweiligen Codierungen bei den "anderen"get-data" Dateien gemacht. Meine jetztige Lösung besteht darin, dass
 
@@ -102,6 +104,8 @@ In der Zwischenzeit habe ich dies jeweils direkt bei den jeweiligen Codierungen 
 Es ist extrem wichtig auch gleich die Reihenfolge festzulegen, weil ansonsten die Darstellung in den Grafiken alfabetisch erfolgt, d.h. in der Reihenfolge "ausbaufähig", "ausreichend", "nicht vorhanden", "schlecht", sehr gut". Um das zu verhindern müssen mit der Umwandlung auch Namen der Ausprägungen ("levels") in der richtigen Reihenfolge übergeben werden. 
 
 ***
+
+## Methode neu: Variable faktorisieren
 
 In der Zwischenzeit habe die Faktorisierung der Variablen gleich mit der richtigen Reihenfolge von Kategorien und Etiketten bzw. Bezeichnungen ("levels and labels") vorgenommen. Das Muster für den entsprechnden Code ist:
 

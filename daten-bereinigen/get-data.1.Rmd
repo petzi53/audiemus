@@ -44,7 +44,7 @@ if (!require("forcats"))
 ## Daten einspielen
 
 
-Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei hat 5 Blätter (sheets). Ich lade vorerst nur das erste Blatt in R ein und speichere es in ein für R lesbares Format ab. 
+Die Daten sind als Excel-Datei `umfrage-tirol.xlsx` vorhanden. Die Excel-Datei hat 5 Blätter (sheets). Ich lade für die Bearbeitung immer nur ein in `R` ein und speichere es in ein für `R` lesbares Format ab. 
 
 
 ```{r load-first-sheet-of-excel-file-into-r-memory}
@@ -74,7 +74,7 @@ Bevor weitergearbeitet werden kann, müssen die Daten "aufgeräumt"" werden. Die
 Für die weiteren Transformationen der Datei lege ich ein neues Datenset an, das ich `tirol` nenne.
 Der erste Schritt ist es, dass Zeilen und Spalten verdreht werden. Dies geschieht mit der Funktion `t` (= transpose). `t` erzeugt eine Matrix; ich bevorzuge aber weiterhin im `tibble`-Format zu bleiben. 
 
-```{r}
+```{r transpose-dataset}
 tirol.1 <- as_tibble(t(umfrage.1))
 ```
 
@@ -88,8 +88,8 @@ Zum Unterschied von meinem ersten Anlauf (unter "daten-bereinigen-alt" abgespeic
 
 * Codierung mit Zahlen (statt mit Buchstaben)
 * Variable sinnvoll umbenennen (wie bisher)
-* Variable faktorisieren
-* Faktor mit Level versehen
+* Variable faktorisieren (jetzt bereits und nicht erst bei der Auswertung)
+* Faktor mit Level versehen (jetzt bereits und nicht erst bei der Auswertung)
 
 ## Ausprägungen in Variable überführen
 
@@ -209,8 +209,6 @@ names(tirol.1)[names(tirol.1) == 'V55'] <- 'note.kopfhoerer'
 tirol.1 <- slice(tirol.1, 3:n())
 tirol.1[c(1, 3:6, 8:12, 14:18, 20:24, 26:30, 32:36, 38:42, 44:48, 50:54)] <- list(NULL)
 ```
-
-# 
 
 
 # Datensatz bereinigt speichern
