@@ -20,9 +20,12 @@ if (!require("readxl"))
 if (!require("pander"))
         {install.packages("pander", repos = 'http://cran.wu.ac.at/')
         library(pander)}
+<<<<<<< HEAD
 if (!require("forcats"))
         {install.packages("forcats", repos = 'http://cran.wu.ac.at/')
         library(forcats)}
+=======
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 
 
@@ -45,6 +48,7 @@ tirol.1 <- as_tibble(t(umfrage.1))
 ## ----auspraegungen-in-variable-ueberfuehren------------------------------
 
 # schultyp
+<<<<<<< HEAD
 tirol.1$V2[tirol.1$V3 == "x"] <- 1 # AHS
 tirol.1$V2[tirol.1$V4 == "x"] <- 2 # NMS
 tirol.1$V2[tirol.1$V5 == "x"] <- 3 # PTS
@@ -68,6 +72,22 @@ tirol.1$t.pc.ja <- factor(as.factor(tirol.1$t.pc.ja),
 # t.pc.nein 
 # wird wegen verwirrender Formulierung nicht genützt!
 # zur Erinnerung bleibt A,B,C,D,E als falsche Codierung bestehen
+=======
+tirol.1$V2[tirol.1$V3 == "x"] <- "A"
+tirol.1$V2[tirol.1$V4 == "x"] <- "B"
+tirol.1$V2[tirol.1$V5 == "x"] <- "C"
+names(tirol.1)[names(tirol.1) == 'V2'] <- 'schultyp'
+
+# t.pc.ja
+tirol.1$V7[tirol.1$V8 == "x"] <- "A"
+tirol.1$V7[tirol.1$V9 == "x"] <- "B"
+tirol.1$V7[tirol.1$V10 == "x"] <- "C"
+tirol.1$V7[tirol.1$V11 == "x"] <- "D"
+tirol.1$V7[tirol.1$V12 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V7'] <- 't.pc.ja'
+
+# t.pc.nein
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 tirol.1$V13[tirol.1$V14 == "x"] <- "A"
 tirol.1$V13[tirol.1$V15 == "x"] <- "B"
 tirol.1$V13[tirol.1$V16 == "x"] <- "C"
@@ -76,6 +96,7 @@ tirol.1$V13[tirol.1$V18 == "x"] <- "E"
 names(tirol.1)[names(tirol.1) == 'V13'] <- 't.pc.nein'
 
 # t.tablet
+<<<<<<< HEAD
 tirol.1$V19[tirol.1$V20 == "x"] <- 1
 tirol.1$V19[tirol.1$V21 == "x"] <- 2
 tirol.1$V19[tirol.1$V22 == "x"] <- 3
@@ -146,6 +167,54 @@ tirol.1$t.kopfhoerer <- factor(as.factor(tirol.1$t.kopfhoerer),
         levels = c(1, 2, 3, 4, 5), 
         labels = c("sehr gut", "ausreichend", "ausbaufähig", "schlecht", "nicht vorhanden"),
         ordered = TRUE)
+=======
+tirol.1$V19[tirol.1$V20 == "x"] <- "A"
+tirol.1$V19[tirol.1$V21 == "x"] <- "B"
+tirol.1$V19[tirol.1$V22 == "x"] <- "C"
+tirol.1$V19[tirol.1$V23 == "x"] <- "D"
+tirol.1$V19[tirol.1$V24 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V19'] <- 't.tablet'
+
+# t.lan
+tirol.1$V25[tirol.1$V26 == "x"] <- "A"
+tirol.1$V25[tirol.1$V27 == "x"] <- "B"
+tirol.1$V25[tirol.1$V28 == "x"] <- "C"
+tirol.1$V25[tirol.1$V29 == "x"] <- "D"
+tirol.1$V25[tirol.1$V30 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V25'] <- 't.lan'
+
+# t.wlan
+tirol.1$V31[tirol.1$V32 == "x"] <- "A"
+tirol.1$V31[tirol.1$V33 == "x"] <- "B"
+tirol.1$V31[tirol.1$V34 == "x"] <- "C"
+tirol.1$V31[tirol.1$V35 == "x"] <- "D"
+tirol.1$V31[tirol.1$V36 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V31'] <- 't.wlan'
+
+# t.beamer
+tirol.1$V37[tirol.1$V38 == "x"] <- "A"
+tirol.1$V37[tirol.1$V39 == "x"] <- "B"
+tirol.1$V37[tirol.1$V40 == "x"] <- "C"
+tirol.1$V37[tirol.1$V41 == "x"] <- "D"
+tirol.1$V37[tirol.1$V42 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V37'] <- 't.beamer'
+
+# t.whiteboard
+tirol.1$V43[tirol.1$V44 == "x"] <- "A"
+tirol.1$V43[tirol.1$V45 == "x"] <- "B"
+tirol.1$V43[tirol.1$V46 == "x"] <- "C"
+tirol.1$V43[tirol.1$V47 == "x"] <- "D"
+tirol.1$V43[tirol.1$V48 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V43'] <- 't.whiteboard'
+
+# kopfhoerer
+tirol.1$V49[tirol.1$V50 == "x"] <- "A"
+tirol.1$V49[tirol.1$V51 == "x"] <- "B"
+tirol.1$V49[tirol.1$V52 == "x"] <- "C"
+tirol.1$V49[tirol.1$V53 == "x"] <- "D"
+tirol.1$V49[tirol.1$V54 == "x"] <- "E"
+names(tirol.1)[names(tirol.1) == 'V49'] <- 't.kopfhoerer'
+>>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 names(tirol.1)[names(tirol.1) == 'V55'] <- 'note.kopfhoerer'
 
