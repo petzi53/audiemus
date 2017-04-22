@@ -2,7 +2,7 @@
 ### This function could be mor general if I would add additional parameters in the call
 ### Each of this parameter is a list of two string vectors
 ### the first one is the new (summarised) level,
-### the other one a string vector of levels to collapse
+### the other one is a string vector of levels to collapse
 my_fct_collapse <- function(df)
         # df = data frame of factors
         # that has to match exactly the levels of function fct_collapse

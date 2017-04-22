@@ -1,7 +1,7 @@
 ---
 title: "Proportional gestapelte Balkendiagramme"
 author: "Peter Baumgartner"
-date: '2017-04-16'
+date: '2017-04-22'
 output:
   pdf_document:
     toc: yes
@@ -120,6 +120,11 @@ library(sjPlot)
 library(sjmisc)
 library(forcats)
 
+# diese funktion könnte generalisiert werden
+# indem noch weitere Parameter hinzugefügt werden,
+# die aus einer liste von zwei character vektoren bestehen
+# der erste vektor ist der neue (zusammengefasste) Level
+# der andere Vektor beinhaltet die Levels, die zusammengefasst werden
 my_fct_collapse <- function(df) {
         j = ncol(df)
         for (i in 1:j) {
