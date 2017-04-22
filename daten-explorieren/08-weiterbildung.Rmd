@@ -1,0 +1,127 @@
+---
+title: "Weiterbildungsangebote"
+author: "Peter Baumgartner"
+date: '2017-04-22'
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 3
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+***
+
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T,
+        fig.path = "images/"
+        )
+
+if (!require("tidyverse")) 
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+if (!require("reshape2"))
+        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
+        library(reshape2)}
+if (!require("readxl"))
+        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
+        library(readxl)}
+if (!require("pander"))
+        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
+        library(pander)}
+if (!require("ggplot2"))
+        {install.packages("ggplot2", repos = 'http://cran.wu.ac.at/')
+        library(ggplot2)}
+if (!require("sjmisc"))
+        {install.packages("sjmisc", repos = 'http://cran.wu.ac.at/')
+        library(sjmisc)}
+if (!require("sjPlot"))
+        {install.packages("sjPlot", repos = 'http://cran.wu.ac.at/')
+        library(sjPlot)}
+
+```
+
+# Daten einspielen
+
+
+Die Daten sind als Excel-Datei `Teilnehmer-FB-PHTirol 15-16.xlsx` vorhanden. Die Excel-Datei hat nur ein Blatt (Sheet). Ich lade für die Bearbeitung immer nur ein in `R` ein und speichere es in ein für `R` lesbares Format ab. 
+
+
+```{r load-first-sheet-of-excel-file-into-r-memory}
+
+weiterbildung <- read_excel(
+        "../daten/Teilnehmer-FB-PHTirol 15-16.xlsx",
+        sheet = 1,
+        col_names = TRUE,
+        col_types = NULL,
+        na = "",
+        skip = 0
+        )
+# saveRDS(weiterbildung, file = "../daten/weiterbildung.rds")
+
+```
+
+# Daten für Analyse transformieren
+
+```{r get-data-ready-for-analysis}
+library(dplyr)
+library(stringr)
+
+# rename variables
+weiterbildung <- rename(weiterbildung,
+                        lv.nr =  LV_NR ,
+                        semester = SEMESTER_KB,
+                        lv.titel = LV_TITEL,
+                        dauer = DAUER,
+                        art = ART,
+                        tn = TN
+                        )
+
+# generate-new-variables
+# generate logical variable = T if no participant (= canceled, e.g. "tn == 0")
+# strip 'UE' from variable `dauer`
+weiterbildung <- mutate(weiterbildung,
+       abgesagt = ifelse(tn == 0, TRUE, FALSE),
+       dauer.ue = as.integer(str_sub(dauer, start = 1L, end = -4L))
+        )
+
+
+# factorise variables
+weiterbildung <- within(weiterbildung, {
+                semester <- as.factor(semester)
+                art <- as.factor(art)
+                })
+
+# drop redundant variables 
+# to programm it, here I have to use "standard evaluaton" (SE)
+# this is the command with underscore, e.g. select_() instead select() (= non-standard evaluation)
+# IMPORTANT: for SE the names are to put into quotes
+# for details read the [vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/nse.html)
+
+# drop redudant "ABSAGE", because "tn == 0" equals "abgesagt"
+# drop old `dauer` as information is in `dauer.ue`
+weiterbildung <- select_(weiterbildung, "-ABSAGE", "-dauer")
+```
+
+# Explorative Datenanlyse
+
+Wie verhalten sich abgesagte Veranstaltungen zur Art ver Veranstaltung?
+
+```{r cancellation-and-type-of-seminar-}
+bp <- ggplot(weiterbildung, aes(art, fill = abgesagt)) +
+        geom_bar()
+# bp <- bp + ggtitle("Befragte nach Schultypen")
+# bp <- bp + xlab("Befragte nach Schultypen")
+# bp <- bp + ylab("Anzahl")
+# bp <- bp + guides(fill = guide_legend(title = "Schultyp"))
+bp
+```
