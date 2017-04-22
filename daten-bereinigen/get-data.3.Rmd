@@ -186,15 +186,16 @@ tirol.3$V91[tirol.3$V97 == "x"] <- NA
 tirol.3$V98[tirol.3$V99 == "x"] <- 1
 tirol.3$V98[tirol.3$V100 == "x"] <- 2
 tirol.3$V98[tirol.3$V101 == "x"] <- 3
-tirol.3$V98[tirol.3$V103 == "x"] <- 4
-tirol.3$V98[tirol.3$V104 == "x"] <- 5
+tirol.3$V98[tirol.3$V102 == "x"] <- 4
+tirol.3$V98[tirol.3$V103 == "x"] <- 5
+tirol.3$V98[tirol.3$V104 == "x"] <- NA
 
 
 # w.digi.buch
 tirol.3$V105[tirol.3$V106 == "x"] <- 1
 tirol.3$V105[tirol.3$V107 == "x"] <- 2
 tirol.3$V105[tirol.3$V108 == "x"] <- 3
-tirol.3$V105[tirol.3$V108 == "x"] <- 4
+tirol.3$V105[tirol.3$V109 == "x"] <- 4
 tirol.3$V105[tirol.3$V110 == "x"] <- 5
 tirol.3$V105[tirol.3$V111 == "x"] <- NA
 
@@ -208,105 +209,105 @@ names(tirol.3)[names(tirol.3) == 'V2'] <- 'w.ausstattung'
 tirol.3$w.ausstattung <- factor(as.factor(tirol.3$w.ausstattung), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V10'] <- 'w.raumwechsel'
 tirol.3$w.raumwechsel <- factor(as.factor(tirol.3$w.raumwechsel), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V18'] <- 'w.curricula'
 tirol.3$w.curricula <- factor(as.factor(tirol.3$w.curricula), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V25'] <- 'w.kooperation'
 tirol.3$w.kooperation <- factor(as.factor(tirol.3$w.kooperation), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V32'] <- 'w.mehrwert'
 tirol.3$w.mehrwert <- factor(as.factor(tirol.3$w.mehrwert), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V39'] <- 'w.support'
 tirol.3$w.support <- factor(as.factor(tirol.3$w.support), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V46'] <- 'w.fachbildung'
 tirol.3$w.fachbildung <- factor(as.factor(tirol.3$w.fachbildung), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V54'] <- 'w.did.bildung'
 tirol.3$w.did.bildung <- factor(as.factor(tirol.3$w.did.bildung), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V62'] <- 'w.oer'
 tirol.3$w.oer <- factor(as.factor(tirol.3$w.oer), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V69'] <- 'w.plattform'
 tirol.3$w.plattform <- factor(as.factor(tirol.3$w.plattform), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V76'] <- 'w.zeit'
 tirol.3$w.zeit <- factor(as.factor(tirol.3$w.zeit), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V84'] <- 'w.anerkennung'
 tirol.3$w.anerkennung <- factor(as.factor(tirol.3$w.anerkennung), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V91'] <- 'w.informatik'
 tirol.3$w.informatik <- factor(as.factor(tirol.3$w.informatik), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V98'] <- 'w.med.kompetenz'
 tirol.3$w.med.kompetenz <- factor(as.factor(tirol.3$w.med.kompetenz), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 names(tirol.3)[names(tirol.3) == 'V105'] <- 'w.digi.buch'
 tirol.3$w.digi.buch <- factor(as.factor(tirol.3$w.digi.buch), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 # Kommentarspalten umbenannt

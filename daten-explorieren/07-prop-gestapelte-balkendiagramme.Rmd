@@ -3,12 +3,12 @@ title: "Proportional gestapelte Balkendiagramme"
 author: "Peter Baumgartner"
 date: '2017-04-16'
 output:
-  html_notebook:
-    toc: yes
-    toc_depth: 3
   pdf_document:
     toc: yes
     toc_depth: '3'
+  html_notebook:
+    toc: yes
+    toc_depth: 3
   word_document:
     toc: yes
     toc_depth: '3'
@@ -47,10 +47,15 @@ if (!require("sjmisc"))
 if (!require("sjPlot"))
         {install.packages("sjPlot", repos = 'http://cran.wu.ac.at/')
         library(sjPlot)}
+if (!require("forcats"))
+        {install.packages("forcats", repos = 'http://cran.wu.ac.at/')
+        library(forcats)}
 
 # lade Daten
 umfrage <- readRDS("../daten/audiemus.rds")
 ```
+
+# Explorative Grafiken
 
 Diese Datei stellt die verschiedenen Fragenbatterien als proportional gestapelte Balkendidagramme dar. Das sind Balken, die die perzentuelle Verteilung der Items einer Frage in ihrer Gräße anzeigen. Es werden dabei alle Fragen einer Batterie untereinander zum besseren Vergleich dargestellt.
 
@@ -58,7 +63,7 @@ Ich habe die Grafiken derzeit noch nicht hübsche gemacht, d.h. keine detaillier
 
 ## Ausstattung
 
-```{r label="gestapeltes-balkendiagramm", warning=FALSE, , fig.width=8, fig.height=6}
+```{r label="ausstattung", warning=FALSE, , fig.width=8, fig.height=6}
 library(sjPlot)
 ausstattung <- select(umfrage, c(9:4, 2))
 #names(ausstattung) <- c("PCs", "Tablets", "WLAN")
@@ -88,7 +93,7 @@ library(sjPlot)
 wunsch <- select(umfrage, c(30:16))
 sjp.stackfrq(wunsch, digits = 0)
 ```
-## Interess
+## Interesse an Forbildung
 
 ```{r label="interesse", warning=FALSE, fig.width=8, fig.height=5}
 library(sjPlot)
@@ -104,4 +109,41 @@ audiemus.nutzung <- select(umfrage, c(44:39))
 sjp.stackfrq(audiemus.nutzung, digits = 1)
 ```
 
-# Literatur
+# Grafiken neu codiert
+
+Für mich sind derzeit die Daten zu den Wünschen die interessanteste Abbilung. Einerseits, weil sie recht umfang mögliche förderliche Faktoren abfrägt, andererseits aber auch, weil die Ergebnisse zum Teil überraschend sind. So kommt z.B. recht deutlich heraus, dass der Wunsch nach einer besseren technischen Ausstattung mäßiig ist und vor allemr Zusatzmaterialien (w.oer und w.plattform) und interaktive digitale Schulbücher gewünscht werden. 
+
+In dieser Fragebatterie steckt sehr viel interessantes Material, das mit einer anderen Codierung vielleicht noch deutlischer visualisiert werden kann. Ich dichotomisiere die Skala, indem ich die Antwortvorgaben 1 - 3 ("trifft voll zu", "trifft weitgehend zu", "trifft überwiegend zu") auf "trifft zu" reduziere und die Antwortvorgaben 4 und 5 ("trifft eher nicht zu", "trifft gar nicht zu") in "trifft nicht zu" überführe.
+
+```{r label="recodieren-von-wunsch" , warning=FALSE, fig.width=6, fig.height=10}
+library(sjPlot)
+library(sjmisc)
+library(forcats)
+
+my_fct_collapse <- function(df) {
+        j = ncol(df)
+        for (i in 1:j) {
+                df[[i]] <- fct_collapse(df[[i]],
+                             "trifft zu" = c("trifft voll zu",
+                                             "trifft weitgehend zu",
+                                             "trifft überwiegend zu"),
+                             "trifft nicht zu" = c("trifft eher nicht zu",
+                                                   "trifft gar nicht zu"))
+        }
+        df
+}
+
+
+wunsch.rec <- my_fct_collapse(wunsch)
+
+```
+
+```{r label="wunsch-recodiert", warning=FALSE, fig.width=8, fig.height=10}
+sjp.stackfrq(wunsch.rec, digits = 1, geom.colors = "BrBG")
+```
+
+
+```{r label="wunsch-recodiert-likert", warning=FALSE, fig.width=8, fig.height=10}
+sjp.likert(wunsch.rec, digits = 1, value = "sum.inside")
+```
+

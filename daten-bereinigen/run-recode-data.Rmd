@@ -46,11 +46,8 @@ Diese Datei enthält Anweisungen für einen automatisieren Aufruf aller Programm
 <<<<<<< HEAD
 
 ```{r automatisierter-aufruf-zur-daten-bereinigung}
-=======
-```{r automatisierter-aufruf-zur-daten-bereinigung}
 wd.old <- getwd()
 setwd("~/Documents/Meine Repos/Audiemus/daten-bereinigen")
->>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 
 purl("get-data.1.Rmd")
 purl("get-data.2.Rmd")
@@ -65,11 +62,8 @@ source("get-data.3.R")
 source("get-data.4.R")
 source("get-data.5.R")
 source("combine-and-save.R")
-<<<<<<< HEAD
-=======
 
 setwd(wd.old)
->>>>>>> 197d6e53b5af75583f9610134386d3953fe7d9a2
 ```
 
 

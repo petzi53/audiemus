@@ -48,7 +48,12 @@ if (!require("gcookbook"))
         library(gcookbook)}
 
 
+## laden Datensätze
+umfrage <- readRDS("../daten/audiemus.rds")
+kommentare <- readRDS("../daten/kommentare.rds")
 ```
+
+
 
 # Fragestellung
 
@@ -58,17 +63,25 @@ Eine empirische Erhebung unter Deutsch-Lehrer/innen im Bundesland Tirol geht die
 
 # Theoretischer Hintergrund
 
-Im Rahmen einer Projektarbeit an der Donau-Universität Krems wurde im Studiengang [eEducation](http://www.donau-uni.ac.at/de/studium/eeducation/index.php) eine [Plattform audiemus](http://imbstudent.donau-uni.ac.at/audiemus2/) für Hörverständnisaufgaben für die Sekundarstufe 1 entwickelt. Im Zuge der anschließenden Masterthesis [@mair_audiemus_2017] wurde im Rahmen einer Design-Based Research Studie [@collective_design-based_2003; @reinmann_innovation_2005] Deutschlehrer/innen als potentielle Nutzer/innen der Plattform befragt. Neben den Rückmeldungen zur Plattform selbst, auf die sich die Masterthese konzentrierte, enthielt der [Fragebogen](https://de.surveymonkey.com/results/SM-2WD2HRDG/) auch Items zur technischen Schulausstattung, Mediennutzung und Faktoren, die für den Einsatz digitaler Medien im Deutschunterricht nach Ansicht der Befragten förderlich sein könnten. Datensatz, Berechnung, Grafiken und andere Unterlagen können über [GitHub](https://github.com/petzi53/audiemus) vollständig eingesehen werden. 
+In einer Projektarbeit im Studiengang [eEducation](http://www.donau-uni.ac.at/de/studium/eeducation/index.php) an der Donau-Universität Krems entwickelte eine Gruppe Studierender  [audiemus](http://imbstudent.donau-uni.ac.at/audiemus2/) eine interaktive Plattform für Hörverständnisaufgaben für die Sekundarstufe 1. In einer anschließenden Masterthesis [@mair_audiemus_2017] wurde im Rahmen einer Design-Based Research Studie [@collective_design-based_2003; @reinmann_innovation_2005] Deutschlehrer/innen als potentielle Nutzer/innen der Plattform befragt. Neben den Rückmeldungen zur Plattform selbst, auf die sich die Masterthese konzentrierte, enthielt der [Fragebogen](https://de.surveymonkey.com/results/SM-2WD2HRDG/) auch Items zur technischen Schulausstattung, Mediennutzung und Faktoren, die für den Einsatz digitaler Medien im Deutschunterricht nach Ansicht der Befragten förderlich sein könnten. Datensatz, Berechnung, Grafiken und andere Unterlagen können über [GitHub](https://github.com/petzi53/audiemus) vollständig eingesehen werden. 
 
 # Methodische Durchführung
 
-Der Fragebogen wurde über einen Schulverteiler von Direktor/innen an die 334 Deutsch-Lehrer/innen von Tirol weitergeleitet (AHS: 41/12%, NMS: 252:76%, PTS: 40/12%). Da die Hauptproponentin der Audiemus-Plattform in einer PTS arbeitet, war der Rücklauf für diesen Schultyps überproportional hoch (AHS: 5/14%, NMS: 18/50%, PTS: 13/36%), wohingegen NMS unterrpräsentiert ist. Die Stichprobe ist daher bezogen auf die Schultype nicht als repräsentativ zu bezeichnen (X^2^ = 20,7, df = 2, p > .001).
-
-
-```{r lade-daten}
-umfrage <- readRDS("../daten/audiemus.rds")
-kommentare <- readRDS("../daten/kommentare.rds")
+```{r label="schulformen", echo=FALSE}
+schulform <- matrix(c(17, 100, 32, 4, 34, 19, 41, 253, 40, 5, 18, 13), 
+                    ncol = 3, byrow = TRUE,
+                    dimnames = list(c("Schulen", "weitergeleitet", "Lehrer/innen", "Rücklauf"),
+                                    c("AHS", "NMS", "PTS")))
+schulform <- as.data.frame(schulform)
+schulform.t <- t(schulform)
+schulform.t <- melt(schulform.t)
 ```
+
+
+Direktor/innen aller tiroler Schulen der Sekundarstufe 1 wurden ersucht, die Information zum Fragebogen an die Deutsch-Lehrer/innen weiterzuleiten. Aus einer schriftlichen Nachfrage ergab sich jedoch, dass diese Weiterleitung nur lückenhaft erfolgte: 4 von 17 AHS, 32 von 100 NMS und  19 von 32 PTS Direktionen haben den Fragebogen an 41 AHS-, 253 NMS- und 19 PTS-Deutschlehrer/innen weitergeleitet. Die Hauptproponentin der Audiemus-Plattform ist Lehrerin an einer PTS. Deshalb war sowohl die Weiterleitung als auch der Rücklauf für diesen Schultyps überproportional hoch (AHS: 5/14%, NMS: 18/50%, PTS: 13/36%). Die Stichprobe ist daher bezogen auf die Schulform nicht repräsentativ (X^2^ = 20,7, df = 2, p < .001).
+
+# Ergebnisse
+
 
 
 # Literatur
