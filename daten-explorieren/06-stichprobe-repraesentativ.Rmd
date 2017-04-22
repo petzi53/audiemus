@@ -116,3 +116,24 @@ bp <- ggplot(schultyp.lang, aes(x = Schulart, y = Prozent, fill = Schultyp)) +
         
 bp
 ```
+
+```{r label="schulen-repraesetativ-barplot"}
+## siehe Kapitel 6.3 von REdaS (S.243ff.) 
+
+x.abs <- c(17, 100, 32)
+x.rel <- round(prop.table(table(umfrage$schultyp)), digits = 2)
+x.proz <- round(100 * x.rel, digits = 0)
+X.abs <- c(4, 34, 19)
+X.rel <- prop.table(X.abs / sum(X.abs))
+X.proz <- round(100 * X.rel, digits = 0)
+schulform <- cbind(x.abs, x.proz, X.abs, X.proz)
+schulform
+
+barplot(schulform[, c("X.proz", "x.proz")], beside = TRUE, legend = rownames(schulform), ylim = c(0, 75))
+```
+
+```{r label="chi-quadrat-test-schule"}
+chisq.test(schulform[, 1], p = prop.table(schulform[, 3]))
+```
+```
+

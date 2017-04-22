@@ -200,7 +200,7 @@ names(tirol.5)[names(tirol.5) == 'V43'] <- 'e.technik.ok'
 tirol.5$e.technik.ok <- factor(as.factor(tirol.5$e.technik.ok), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -215,7 +215,7 @@ names(tirol.5)[names(tirol.5) == 'V50'] <- 'e.usability'
 tirol.5$e.usability <- factor(as.factor(tirol.5$e.usability), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -229,7 +229,7 @@ names(tirol.5)[names(tirol.5) == 'V57'] <- 'e.zielgruppe'
 tirol.5$e.zielgruppe <- factor(as.factor(tirol.5$e.zielgruppe), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -243,7 +243,7 @@ names(tirol.5)[names(tirol.5) == 'V64'] <- 'e.relevant'
 tirol.5$e.relevant <- factor(as.factor(tirol.5$e.relevant), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -257,7 +257,7 @@ names(tirol.5)[names(tirol.5) == 'V71'] <- 'e.motivierend'
 tirol.5$e.motivierend <- factor(as.factor(tirol.5$e.motivierend), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -272,7 +272,7 @@ names(tirol.5)[names(tirol.5) == 'V78'] <- 'e.zusatzmaterial'
 tirol.5$e.zusatzmaterial <- factor(as.factor(tirol.5$e.zusatzmaterial), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -286,7 +286,7 @@ names(tirol.5)[names(tirol.5) == 'V85'] <- 'e.testmodus'
 tirol.5$e.testmodus <- factor(as.factor(tirol.5$e.testmodus), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
@@ -300,7 +300,7 @@ names(tirol.5)[names(tirol.5) == 'V92'] <- 'e.praktikabel'
 tirol.5$e.praktikabel <- factor(as.factor(tirol.5$e.praktikabel), 
         levels = c(1, 2, 3, 4, 5), 
         labels = c("trifft voll zu", "trifft weitgehend zu", 
-                   "trifft überwiegend zu", "triff eher nicht zu", "trifft gar nicht zu"),
+                   "trifft überwiegend zu", "trifft eher nicht zu", "trifft gar nicht zu"),
         ordered = TRUE)
 
 
