@@ -1,17 +1,18 @@
 ---
-title: "Digitale Medien im Deutschunterricht"
-author: "Peter Baumgartner"
-date: '2017-04-16'
+title: Förderliche Faktoren für die Nutzung digitale Medien im Deutschunterricht ---
+  eine empirische Erhebung der Sekundarstufe 1 im Bundesland Tirol (Österreich)
+author: "Peter Baumgartner, Claudia Mair, Isabell Grundschober"
+date: '2017-04-23'
 output:
-  html_notebook:
-    toc: yes
-    toc_depth: 3
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
   word_document:
     toc: yes
     toc_depth: '3'
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_notebook:
+    toc: yes
+    toc_depth: 3
 csl: apa.csl
 bibliography: freiburg.bib
 ---
@@ -28,29 +29,6 @@ knitr::opts_chunk$set(
         fig.path = "images/"
         )
 
-if (!require("tidyverse")) 
-        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
-        library(tidyverse)}
-if (!require("reshape2"))
-        {install.packages("reshape2", repos = 'http://cran.wu.ac.at/')
-        library(reshape2)}
-if (!require("readxl"))
-        {install.packages("readxl", repos = 'http://cran.wu.ac.at/')
-        library(readxl)}
-if (!require("pander"))
-        {install.packages("pander", repos = 'http://cran.wu.ac.at/')
-        library(pander)}
-if (!require("ggplot2"))
-        {install.packages("ggplot2", repos = 'http://cran.wu.ac.at/')
-        library(ggplot2)}
-if (!require("gcookbook"))
-        {install.packages("gcookbook", repos = 'http://cran.wu.ac.at/')
-        library(gcookbook)}
-
-
-## laden Datensätze
-umfrage <- readRDS("../daten/audiemus.rds")
-kommentare <- readRDS("../daten/kommentare.rds")
 ```
 
 
@@ -59,29 +37,33 @@ kommentare <- readRDS("../daten/kommentare.rds")
 
 Im Nationalen Bildungsbericht für Österreich [@bruneforth_nbb_2016-1; @bruneforth_nbb_2016-2] wurde --- trotz einer im europäischen Vergleich relativ guten technischen Schulausstattung (5. Rangplatz) --- ein niedriger Nutzungsgrad digialter Medien im Unterricht konstatiert (25. Rangplatz im Spektrum der 27 EU-Länder). Als Erklärung für diese geringe Nutzung von Bildungstechnologien wurde "eine mangelhafte _fachdidaktische_ Medienkompetenz der Lehrenden" vermutet [@baumgartner_medienkompetenz_2016, S.98].
 
-Eine empirische Erhebung unter Deutsch-Lehrer/innen im Bundesland Tirol geht dieser Annahme nach. Woran liegt es, dass --- trotz hoher persönlicher Nutzung der IKT für den privaten Gebrauch und zur Unterrichtsvorbereitung (a.a.0., S.98f) --- digitale Medien im Unterricht wenig eingesetzt werden? 
+Eine empirische Erhebung unter Deutsch-Lehrer/innen der Sekundarstufe 1 im Bundesland Tirol geht dieser Annahme nach.
 
 # Theoretischer Hintergrund
 
-In einer Projektarbeit im Studiengang [eEducation](http://www.donau-uni.ac.at/de/studium/eeducation/index.php) an der Donau-Universität Krems entwickelte eine Gruppe Studierender  [audiemus](http://imbstudent.donau-uni.ac.at/audiemus2/) eine interaktive Plattform für Hörverständnisaufgaben für die Sekundarstufe 1. In einer anschließenden Masterthesis [@mair_audiemus_2017] wurde im Rahmen einer Design-Based Research Studie [@collective_design-based_2003; @reinmann_innovation_2005] Deutschlehrer/innen als potentielle Nutzer/innen der Plattform befragt. Neben den Rückmeldungen zur Plattform selbst, auf die sich die Masterthese konzentrierte, enthielt der [Fragebogen](https://de.surveymonkey.com/results/SM-2WD2HRDG/) auch Items zur technischen Schulausstattung, Mediennutzung und Faktoren, die für den Einsatz digitaler Medien im Deutschunterricht nach Ansicht der Befragten förderlich sein könnten. Datensatz, Berechnung, Grafiken und andere Unterlagen können über [GitHub](https://github.com/petzi53/audiemus) vollständig eingesehen werden. 
+In einer Projektarbeit im Studiengang [eEducation](http://www.donau-uni.ac.at/de/studium/eeducation/index.php) an der Donau-Universität Krems entwickelte eine Gruppe Studierender  [audiemus](http://imbstudent.donau-uni.ac.at/audiemus2/) eine interaktive Plattform für Hörverständnisaufgaben für die Sekundarstufe 1. In einer anschließenden Masterthesis [@mair_audiemus_2017] wurde im Rahmen einer Design-Based Research Studie [@collective_design-based_2003; @reinmann_innovation_2005] Deutschlehrer/innen als potentielle Nutzer/innen der Plattform befragt. 
+
+Neben den Rückmeldungen zur Plattform selbst, auf die sich die Masterthese konzentrierte, enthielt der [Fragebogen](https://de.surveymonkey.com/results/SM-2WD2HRDG/) nicht nur Items zur technischen Schulausstattung und Mediennutzung, sondern --- auf der Grundlage eines einschlägigen Literaturstudium --- auch Faktoren, die für den Einsatz digitaler Medien im Deutschunterricht nach Ansicht der Befragten förderlich sein könnten. Datensatz, Berechnung, Grafiken und andere Unterlagen können über [GitHub](https://github.com/petzi53/audiemus) vollständig eingesehen werden. 
 
 # Methodische Durchführung
 
-```{r label="schulformen", echo=FALSE}
-schulform <- matrix(c(17, 100, 32, 4, 34, 19, 41, 253, 40, 5, 18, 13), 
-                    ncol = 3, byrow = TRUE,
-                    dimnames = list(c("Schulen", "weitergeleitet", "Lehrer/innen", "Rücklauf"),
-                                    c("AHS", "NMS", "PTS")))
-schulform <- as.data.frame(schulform)
-schulform.t <- t(schulform)
-schulform.t <- melt(schulform.t)
-```
 
 
-Direktor/innen aller tiroler Schulen der Sekundarstufe 1 wurden ersucht, die Information zum Fragebogen an die Deutsch-Lehrer/innen weiterzuleiten. Aus einer schriftlichen Nachfrage ergab sich jedoch, dass diese Weiterleitung nur lückenhaft erfolgte: 4 von 17 AHS, 32 von 100 NMS und  19 von 32 PTS Direktionen haben den Fragebogen an 41 AHS-, 253 NMS- und 19 PTS-Deutschlehrer/innen weitergeleitet. Die Hauptproponentin der Audiemus-Plattform ist Lehrerin an einer PTS. Deshalb war sowohl die Weiterleitung als auch der Rücklauf für diesen Schultyps überproportional hoch (AHS: 5/14%, NMS: 18/50%, PTS: 13/36%). Die Stichprobe ist daher bezogen auf die Schulform nicht repräsentativ (X^2^ = 20,7, df = 2, p < .001).
+Vier Interviews halfen bei der Entwicklung des Fragebogens, der vor allem den Design-Based Ansatz für die Weiter-Entwicklung der `audiemus`-Plattform diente. Aus diesem Grunde haben auch nur 28-29 der 36 Teilnehmer/innen der Befragung, die uns hier interessierenden Fragen zu förderlichen Faktoren zum Medieneinsatz im Deutschunterricht allgemein --- also unabhängig von der Plattform -- ausgefüllt. 
+
+Direktor/innen aller tiroler Schulen der Sekundarstufe 1 wurden ersucht, die Information zum Fragebogen an die Deutsch-Lehrer/innen weiterzuleiten. Aus einer schriftlichen Nachfrage ergab sich jedoch, dass diese Weiterleitung nur lückenhaft erfolgte: 4 von 17 AHS, 32 von 100 NMS und  19 von 32 PTS Direktionen haben den Fragebogen an 41 AHS-, 253 NMS- und 19 PTS-Deutschlehrer/innen weitergeleitet. Die Hauptproponentin der Audiemus-Plattform ist Lehrerin an einer PTS. Deshalb war sowohl die Weiterleitung als auch der Rücklauf für diesen Schultyps überproportional hoch (AHS: 5/14%, NMS: 18/50%, PTS: 13/36%). Die Stichprobe ist daher bezogen auf die Schulform nicht repräsentativ (Pearson Chi-Quadrat Test: p > .005).
 
 # Ergebnisse
 
+Mehr als die Hälfte aller Befragten gab an, dass eine "bessere technische Ausstattung an meiner Schule" _kein_ förderlicher Faktor für den vermehrten Einsatz digitaler Medien im Deutschunterricht sei. Von allen 15 Items der Fragenbatterie zu förderlichen Faktoren erhielt der Ausbau der IKT-Infrastruktur der eigene Schule die geringste Zustimmungsrate. 
+
+Obowhl die Selbsteinschätzung zur IKT-Kompetenz versus fachdidaktischer Kompetenz keine signifikanten Unterschiede zeigte, war dies bei der nicht auf die eigene Person bezogene Frage nach allgemeinen förderlichen Faktoren für den Einsatz digitaler Medien durchaus der Fall. Unsere Hypothese, dass eine fach(didaktische) Ausbildung dem Einsatz digitaler Medien im Unterrichts förderlich ist, wurde mit dem exakten Test nach Fisher als statistisch signifikant bestätigt. Nur 4 Personen lehnen dies Aussage ab. Das ist die zweithäufigste  Zustimmung bei den 15 abgefragten Faktoren. Auch andere förderliche Aspekte der Ausbildung (v.a. Medienkompetenz aber auch didaktische Bildung) werden gegenüber der Ausstattung signifikant als wichtiger eingeschätzt. Bei Fortbildungsprogrammen mit bloß allgemein-didaktischen Inhalten zum Einsatz digitaler Medien ist der Unterschied allerdings gerade noch signifikant, aber gegenüber fachdidaktischen Inhalten in seinen Effekten fast um die Hälfte geringer.
+
+Allerdings zeigen sich aus unserer Befragung noch weitere Aspekte: Besonders wertvoll wird nicht nur fachdidaktische Ausbildung eingeschätzt, sondern vor allem auch die Nutzung von bereits aufbereiteten digitlaen Unterrichtsmaterialien. Dies betrifft sowohl Plattformen mit einer entsprechenden Materialsammlung aber ganz entscheidend auch den Wunsch, dass die in Österreich gerade aktuell flächendeckend ausgerollten digitalen Schulbücher interaktiv gestaltet werden und nicht bloß eine 1:1 Umsetzung des gedruckten Buches darstellen. Fast alle Personen haben dies nicht nur bejaht, sondern mehr als 80% der Befragten fand diesen Faktor voll bzw. weitgehend förderlich. 
+
+Die mit digitale Materialien verbesserten Möglichkeiten außerschulischer Kooperationen, die Anerkennung des Einsatz neuer Medien im Unterricht durch die Eltern oder aber andere Schulformen, die mehr Unterrichtszeit ermöglichen (Stichwort: Ganztagsschule) fanden hingegen weniger Zustimmung.  
+
+Zusammenfassend lässt sich sagen, dass Weiterbildungsprogramme, die den Einsatz digitaler Materialien und interaktiver Werkzeuge für den konkreten Unterrichtseinsatz fachdidaktisch verschränken, die größte Chance haben, angenommen zu werden.
 
 
 # Literatur
