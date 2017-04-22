@@ -12,6 +12,8 @@ output:
   word_document:
     toc: yes
     toc_depth: '3'
+csl: ../article/apa.csl
+bibliography: ../article/freiburg.bib
 ---
 ***
 
@@ -50,10 +52,31 @@ if (!require("sjPlot"))
 if (!require("forcats"))
         {install.packages("forcats", repos = 'http://cran.wu.ac.at/')
         library(forcats)}
+if (!require("REdaS"))
+        {install.packages("REdaS", repos = 'http://cran.wu.ac.at/')
+        library(REdaS)}
 
 # lade Daten
 umfrage <- readRDS("../daten/audiemus.rds")
 ```
+
+# Schulform und Repräsentativität
+
+```{r label="schulformen"}
+schulform <- matrix(c(17, 100, 32, 4, 34, 19, 41, 253, 40, 5, 18, 13), 
+                    ncol = 3, byrow = TRUE,
+                    dimnames = list(c("Schulen", "weitergeleitet", "Lehrer/innen", "Rücklauf"),
+                                    c("AHS", "NMS", "PTS")))
+schulform <- as.data.frame(schulform)
+schulform.t <- t(schulform)
+schulform.t <- melt(schulform.t)
+schulart <- schulform[c(1,4) , ]
+fisher.test(schulart)
+chisq.test(schulart, simulate.p.value = TRUE)
+```
+
+Die Stichprobe ist daher bezogen auf die Schulform bei beiden Tests nicht repräsentativ (Pearson Chi-Quadrat Test: p > .005).
+
 
 # Explorative Grafiken
 
@@ -63,7 +86,7 @@ Ich habe die Grafiken derzeit noch nicht hübsche gemacht, d.h. keine detaillier
 
 ## Ausstattung
 
-```{r label="ausstattung", warning=FALSE, , fig.width=8, fig.height=6}
+```{r label="ausstattung", warning=FALSE, fig.width=8, fig.height=6}
 library(sjPlot)
 ausstattung <- select(umfrage, c(9:4, 2))
 #names(ausstattung) <- c("PCs", "Tablets", "WLAN")
@@ -72,7 +95,7 @@ sjp.stackfrq(ausstattung, digits = 0)
 
 ## IKT-Kompetenz
 
-```{r label="ikt-kompetenz", warning=FALSE, , fig.width=8, fig.height=6}
+```{r label="ikt-kompetenz", warning=FALSE, fig.width=8, fig.height=6}
 library(sjPlot)
 ikt.kompetenz <- select(umfrage, c(15:10))
 sjp.stackfrq(ikt.kompetenz, digits = 0)
@@ -86,13 +109,25 @@ audiemus.erfahrung <- select(umfrage, c(52:45))
 sjp.stackfrq(audiemus.erfahrung, digits = 0)
 ```
 
-## Förderliche Faktoren (Wünsche)
+## Förderliche Faktoren (Wünsche differenzenziert)
 
 ```{r label="wunsch", warning=FALSE, fig.width=8, fig.height=10}
 library(sjPlot)
 wunsch <- select(umfrage, c(30:16))
-sjp.stackfrq(wunsch, digits = 0)
+sjp.stackfrq(wunsch, digits = 0, geom.colors = "Blues")
 ```
+
+## Wünsche differenzenziert und sortiert
+
+Zum Vergleich nochmals die Wünsche differenziert, diesmal jedoch sortiert.
+
+```{r label="wunsch-differenziert-sortiert", warning=FALSE, fig.width=8, fig.height=10}
+library(sjPlot)
+wunsch <- select(umfrage, c(30:16))
+sjp.stackfrq(wunsch, digits = 0, geom.colors = "Blues", sort.frq = "first.asc")
+```
+
+
 ## Interesse an Forbildung
 
 ```{r label="interesse", warning=FALSE, fig.width=8, fig.height=5}
@@ -109,7 +144,7 @@ audiemus.nutzung <- select(umfrage, c(44:39))
 sjp.stackfrq(audiemus.nutzung, digits = 1)
 ```
 
-# Grafiken neu codiert
+# Förderliche Faktoren neu codiert
 
 Für mich sind derzeit die Daten zu den Wünschen die interessanteste Abbilung. Einerseits, weil sie recht umfang mögliche förderliche Faktoren abfrägt, andererseits aber auch, weil die Ergebnisse zum Teil überraschend sind. So kommt z.B. recht deutlich heraus, dass der Wunsch nach einer besseren technischen Ausstattung mäßiig ist und vor allemr Zusatzmaterialien (w.oer und w.plattform) und interaktive digitale Schulbücher gewünscht werden. 
 
@@ -143,12 +178,91 @@ wunsch.rec <- my_fct_collapse(wunsch)
 
 ```
 
-```{r label="wunsch-recodiert", warning=FALSE, fig.width=8, fig.height=10}
-sjp.stackfrq(wunsch.rec, digits = 1, geom.colors = "BrBG")
-```
-
+## Wünsche ja/nein mit zentrierte Linie
 
 ```{r label="wunsch-recodiert-likert", warning=FALSE, fig.width=8, fig.height=10}
-sjp.likert(wunsch.rec, digits = 1, value = "sum.inside")
+sjp.likert(wunsch.rec, digits = 1, value = "sum.inside", geom.colors = "BrBG", sort.frq = "pos.desc")
 ```
 
+Die Ja/nein-Zentrierung à la Likter-Skala ist nicht so erhellend, wir das normale gestapelte Balkendiagram.
+
+## Balken-Diagramm: ja/nein Wünsche
+
+```{r label="wunsch-recodiert", warning=FALSE, fig.width=8, fig.height=10}
+sjp.stackfrq(wunsch.rec, digits = 1, geom.colors = "BrBG", sort.frq = "first.asc")
+```
+
+# Verschiedene Signifikanz-Tests
+
+## Chi-Quadrat Homogenitätstest
+
+Ist die Verteilung vn Häufigkeiten in verschiedenen Gruppen gleich, bzw. sind die Unterschiede nur durch Zufälle bestimmt?
+
+Wegen der geringen Zahlen muss ich hier die Monte Caralo Simulation verwenden.
+
+```{r chi-qudarat-homogenity-test}
+table(wunsch.rec$w.ausstattung, wunsch.rec$w.fachbildung)
+chisq.test(table(wunsch.rec$w.ausstattung, wunsch.rec$w.fachbildung), simulate.p.value = TRUE)
+```
+
+Es ergibt sich hier keine Signifikanz, was mich wundert. Das Problem liegt darin, dass die Fallzahlen in der zweiten Spalte zu klein ist. Als Faustregel gilt, dass die zu erwarteten Häufigkeiten über 5 liegen sollten [@hatzinger_r:_2014, S. 285]. 
+
+## Exakter Test nach Fisher
+
+Abhilfe schafft hier der exakte Test nach Fischer. Dabei "werden alle denkbaren Kreuztabellen mit denselben Randsummen wie in der Stichprobe bestimmt, die mindestens so stark wie die der Stichprobe gegen die Nullhypothese sprechen" [@hatzinger_r:_2014, S. 285].
+
+```{r fisher-test}
+ff1 <- matrix(c(25, 4, 14, 15), nr = 2, byrow = TRUE)
+rownames(ff1) <- c("Fachdidaktik", "Ausstattung")
+colnames(ff1) <- c("Ja", "Nein")
+fisher.test(ff1)
+```
+Hier gibt es nun ein deutliches signifikantes Ergebnis. Allerdings ist die händische Eingabe mit der Funktion `c` etwas umständlich. 
+
+```{r fisher-tests-with-other-variables}
+ff2 <- matrix(c(25, 4, 24, 4), nr = 2, byrow = TRUE)
+rownames(ff2) <- c("Fachdidaktik", "Medienkompetenz")
+colnames(ff2) <- c("Ja", "Nein")
+fisher.test(ff2)
+
+ff3 <- matrix(c(25, 4, 22, 6), nr = 2, byrow = TRUE)
+rownames(ff3) <- c("Fachdidaktik", "Didaktik")
+colnames(ff3) <- c("Ja", "Nein")
+fisher.test(ff3)
+
+ff4 <- matrix(c(22, 6, 14, 15), nr = 2, byrow = TRUE)
+rownames(ff4) <- c("Didaktik", "Ausstattung")
+colnames(ff4) <- c("Ja", "Nein")
+fisher.test(ff4)
+
+ff5 <- matrix(c(24, 4, 14, 15), nr = 2, byrow = TRUE)
+rownames(ff5) <- c("Medienkompetenz", "Ausstattung")
+colnames(ff5) <- c("Ja", "Nein")
+fisher.test(ff5)
+```
+
+## Odds-Ratio-Test (Chancenverhältnis)
+
+Hier wird ebenfalls gefragt, ob sich zwei Gruppen in ihren Häufigkeiten unterscheiden. Der Chi-Quadrat und Fisher-Test sagt bloß aus, ob es signifikante Unterschiede gibt, aber nicht wie groß die Unterschiede sind. Das bedeutet, dass bei großen Stichproben selbst kleine Unterschiede (Effektgrößen) signifikant sind.
+
+Mit dem Test zum Odds-Ratio-Test wird nach dem Verhältnis der Anteile gefragt, der unabängig von der Stichprobe ist.
+
+
+
+```{r odds-ratio-tests}
+or.ff1 <- odds_ratios(as.table(ff1))
+summary(or.ff1)
+or.ff2 <- odds_ratios(as.table(ff2))
+summary(or.ff2)
+or.ff3 <- odds_ratios(as.table(ff3))
+summary(or.ff3)
+or.ff4 <- odds_ratios(as.table(ff4))
+summary(or.ff4)
+or.ff5 <- odds_ratios(as.table(ff5))
+summary(or.ff5)
+        
+```
+Hier zeigt sich nun, dass der Unterschied von didaktischer Ausbildung zur Ausstattung zwar noch auf dem Niveau p < 0,05 signifikant ist, aber diese Effektstärke im Vergleich zum Chancenverhältnis von Fachdidaktik und Ausstattung nur etwa halb so groß ist.
+
+
+# Literatur
